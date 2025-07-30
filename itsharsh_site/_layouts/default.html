@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    {% seo %}
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <nav class="navigation">
+                <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">home</a>
+                <a href="{{ '/itsharsh/about' | relative_url }}" class="nav-link {% if page.url == '/itsharsh/about/' %}active{% endif %}">about</a>
+                <a href="{{ '/itsharsh/experience' | relative_url }}" class="nav-link {% if page.url == '/itsharsh/experience/' %}active{% endif %}">experience</a>
+                <a href="{{ '/itsharsh/projects' | relative_url }}" class="nav-link {% if page.url == '/itsharsh/projects/' %}active{% endif %}">projects</a>
+                <a href="{{ '/itsharsh/papers' | relative_url }}" class="nav-link {% if page.url == '/itsharsh/papers/' %}active{% endif %}">papers</a>
+                <a href="{{ '/itsharsh/blogs' | relative_url }}" class="nav-link {% if page.url == '/itsharsh/blogs/' %}active{% endif %}">blogs</a>
+            </nav>
+            <div class="social-links">
+                <a href="https://github.com/tooharshh" target="_blank" class="social-link">github</a>
+                <a href="https://www.linkedin.com/in/harshdudhatra/" target="_blank" class="social-link">linkedin</a>
+            </div>
+        </header>
+
+        <main class="content">
+            {{ content }}
+        </main>
+    </div>
+</body>
+</html>
