@@ -250,6 +250,43 @@ a {
     font-style: italic;
 }
 
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.project-card {
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    background-color: var(--bg-color);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+    }
+
+    h3 {
+        margin-bottom: 1rem;
+        margin-top: 0;
+    }
+
+    p {
+        margin-bottom: 0;
+        color: var(--text-secondary);
+    }
+}
+
+// Dark mode adjustments
+body.dark-mode .project-card:hover,
+html.dark-mode body .project-card:hover {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
 @media (max-width: 768px) {
     .site-header {
         flex-direction: column;
