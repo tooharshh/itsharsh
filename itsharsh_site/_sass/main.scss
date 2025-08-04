@@ -8,10 +8,11 @@
 }
 
 // Dark mode colors
-body.dark-mode {
+body.dark-mode,
+html.dark-mode body { 
     --bg-color: #212427;
     --text-color: #FFFAFA;
-    --text-secondary: #9da5b4;
+    --text-secondary: #9da5b4
     --border-color: #404448;
     --underline-color: #FFFAFA;
 }
@@ -29,6 +30,14 @@ body {
     line-height: 1.6;
     font-size: 16px;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.outer-border {
+    min-height: 100vh;
+    padding: 1.5rem;
+    border: 2px solid var(--text-color);
+    border-radius: 12px;
+    margin: 1rem;
 }
 
 .container {
