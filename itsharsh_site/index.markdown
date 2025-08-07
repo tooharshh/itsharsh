@@ -10,6 +10,6 @@ permalink: /
 
 <div class="intro">
     <p>learning how to make algorithms learn</p>
-    <p>currently working on how to write code that can sniff earthquakes</p>
+    <p>overfitting myself to the couch at <a href="https://nexttechlab.in/" target="_blank">NextTechLab</a></p>
     <p>tinkering at <a href="https://www.linkedin.com/company/foresight-x06/posts/?feedView=all" target="_blank">foresight-x</a></p>
 </div>
