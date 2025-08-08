@@ -1,0 +1,21 @@
+[build]
+  base = "itsharsh_site"
+  command = "bundle exec jekyll build"
+  publish = "itsharsh_site/_site"
+
+[build.environment]
+  RUBY_VERSION = "3.0.0"
+  JEKYLL_ENV = "production"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[redirects]]
+  from = "/itsharsh/*"
+  to = "/:splat"
+  status = 200
