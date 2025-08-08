@@ -286,20 +286,6 @@ html.dark-mode body .experience-item:hover {
     box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
 }
 
-.ascii-experience {
-    font-family: "Space Mono", monospace;
-    font-size: 0.85rem;
-    line-height: 1.4;
-    color: var(--text-color);
-    background-color: var(--bg-color);
-    padding: 0;
-    border: none;
-    border-radius: 0;
-    overflow-x: auto;
-    white-space: pre;
-    transition: all 0.3s ease;
-}
-
 .projects-grid {
     display: grid;
     grid-template-columns: 1fr;

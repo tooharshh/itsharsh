@@ -1,7 +1,7 @@
 [build]
   base = "itsharsh_site"
   command = "bundle exec jekyll build"
-  publish = "itsharsh_site/_site"
+  publish = "_site"
 
 [build.environment]
   RUBY_VERSION = "3.0.0"
