@@ -149,7 +149,7 @@ body {
 }
 
 .hero-greeting {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 600;
     margin-bottom: 2rem;
     color: var(--text-color);
@@ -219,10 +219,91 @@ a {
     margin-bottom: 2rem;
 }
 
+.experience-section {
+    margin-top: 2rem;
+}
+
+.experience-item {
+    border: 2px dotted var(--border-color);
+    padding: 1.5rem;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+    background-color: var(--bg-color);
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-style: dashed;
+        border-color: var(--text-secondary);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transform: translateY(-1px);
+    }
+
+    h2 {
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+    
+    .duration {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        margin-top: 0;
+        font-weight: normal;
+    }
+}
+
+.role-info {
+    font-size: 1rem;
+    
+    p {
+        margin-bottom: 0.75rem;
+        line-height: 1.5;
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    
+    .role, .duration {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+    }
+    
+    .description {
+        font-size: 1rem;
+        color: var(--text-color);
+        margin-top: 0.5rem;
+        font-style: italic;
+    }
+}
+
+// Dark mode adjustments
+body.dark-mode .experience-item:hover,
+html.dark-mode body .experience-item:hover {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
+}
+
+.ascii-experience {
+    font-family: "Space Mono", monospace;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    overflow-x: auto;
+    white-space: pre;
+    transition: all 0.3s ease;
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.5 rem;
+    gap: 1rem;
     margin-top: 2rem;
 }
 

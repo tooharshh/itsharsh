@@ -6,4 +6,86 @@ permalink: /itsharsh/experience/
 
 <h1>experience</h1>
 
-<p class="coming-soon">coming soon</p>
+<div class="experience-section">
+    <div class="experience-item">
+        <h2>NextTechLab</h2>
+        <p class="duration" data-start="2025-04" data-end="present">Apr 2025 - Present · <span class="duration-calc"></span></p>
+        <div class="role-info">
+            <p class="role"><strong>Role:</strong> Associate</p>
+            <p class="description">Part of the McCarthy Lab, strengthening my roots in AI and ML.</p>
+        </div>
+    </div>
+
+    <div class="experience-item">
+        <h2>Foresight-X</h2>
+        <p class="duration" data-start="2025-02" data-end="present">Feb 2025 - Present · <span class="duration-calc"></span></p>
+        <div class="role-info">
+            <p class="role"><strong>Role:</strong> Co-Founder</p>
+            <p class="description">Foresight X Lab is an independent research lab dedicated to disaster management. We work on mitigation, preparedness, response, and recovery procedures for disasters. Currently working on implementing AI/ML, Digital Twin technologies to predict natural calamities before they occur.</p>
+        </div>
+    </div>
+
+    <div class="experience-item">
+        <h2>KRUU</h2>
+        <p class="duration" data-start="2025-02" data-end="present">Jan 2023 - Jun 2023 · <span class="duration-calc"></span></p>
+        <div class="role-info">
+            <p class="role"><strong>Role:</strong> Campus Ambassador</p>
+            <p class="description">Fellow of the KRUU & Mindler Maker Fellowship.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateDuration() {
+    const durationElements = document.querySelectorAll('.duration[data-start]');
+    
+    durationElements.forEach(element => {
+        const startDate = element.getAttribute('data-start');
+        const endDate = element.getAttribute('data-end');
+        
+        let startYear, startMonth;
+        [startYear, startMonth] = startDate.split('-').map(Number);
+        
+        let endYear, endMonth;
+        if (endDate === 'present') {
+            const now = new Date();
+            endYear = now.getFullYear();
+            endMonth = now.getMonth() + 1; // getMonth() returns 0-11
+        } else {
+            [endYear, endMonth] = endDate.split('-').map(Number);
+        }
+        
+        // Calculate total months
+        let totalMonths = (endYear - startYear) * 12 + (endMonth - startMonth) + 1;
+        
+        let durationText = '';
+        if (totalMonths === 1) {
+            durationText = '1 mo';
+        } else if (totalMonths < 12) {
+            durationText = `${totalMonths} mos`;
+        } else {
+            const years = Math.floor(totalMonths / 12);
+            const remainingMonths = totalMonths % 12;
+            
+            if (remainingMonths === 0) {
+                durationText = years === 1 ? '1 yr' : `${years} yrs`;
+            } else {
+                const yearText = years === 1 ? '1 yr' : `${years} yrs`;
+                const monthText = remainingMonths === 1 ? '1 mo' : `${remainingMonths} mos`;
+                durationText = `${yearText} ${monthText}`;
+            }
+        }
+        
+        const calcSpan = element.querySelector('.duration-calc');
+        if (calcSpan) {
+            calcSpan.textContent = durationText;
+        }
+    });
+}
+
+// Calculate duration on page load
+document.addEventListener('DOMContentLoaded', calculateDuration);
+
+// Update duration every month (check daily for month changes)
+setInterval(calculateDuration, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+</script>
