@@ -4,7 +4,7 @@
   publish = "_site"
 
 [build.environment]
-  RUBY_VERSION = "3.0.0"
+  RUBY_VERSION = "3.2.0"
   JEKYLL_ENV = "production"
 
 [[headers]]
