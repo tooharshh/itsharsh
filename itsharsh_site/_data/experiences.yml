@@ -1,0 +1,50 @@
+# EXPERIENCE DATA
+# 
+# This YAML file stores all professional experience entries
+# Separating content from presentation improves maintainability
+#
+# WHY USE DATA FILES?
+# 1. Easy content updates - change data without touching HTML
+# 2. Consistent formatting - template ensures uniform display
+# 3. Reusability - same data can be used in multiple places
+# 4. Scalability - easy to add/remove/reorder entries
+# 5. Version control friendly - cleaner diffs when content changes
+#
+# DATA STRUCTURE:
+# - organization: Company/organization name
+#   start_date: Start date in YYYY-MM format
+#   end_date: End date in YYYY-MM format or "present" for current positions
+#   role: Job title or role
+#   description: Brief description of responsibilities/achievements
+#
+# USAGE IN TEMPLATES:
+# {% for exp in site.data.experiences %}
+#   {{ exp.organization }}
+#   {{ exp.role }}
+# {% endfor %}
+
+# ============================================
+# CURRENT POSITIONS (end_date: present)
+# ============================================
+
+- organization: "NextTechLab"
+  start_date: "2025-04"
+  end_date: "present"
+  role: "Associate"
+  description: "Part of the McCarthy Lab, strengthening my roots in AI and ML."
+
+- organization: "Foresight-X"
+  start_date: "2025-02"
+  end_date: "present"
+  role: "Co-Founder"
+  description: "Implementing AI/ML, Digital Twin technologies to predict natural calamities before they occur."
+
+# ============================================
+# PAST POSITIONS
+# ============================================
+
+- organization: "KRUU"
+  start_date: "2023-01"
+  end_date: "2023-06"
+  role: "Campus Ambassador"
+  description: "Fellow of the KRUU & Mindler Maker Fellowship."
