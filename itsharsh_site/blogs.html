@@ -5,10 +5,10 @@ title: "Blogs - itsharsh"
 # This creates a simpler, more professional URL: yoursite.com/blogs/
 permalink: /blogs/
 # SEO META DESCRIPTION
-# Forward-looking description for future blog content
-# Keywords hint at potential topics: AI, ML, tech insights
+# Updated to reflect Notion-hosted blog posts
+# Keywords: AI, ML, tech insights, thoughts
 # Maintains casual, approachable tone consistent with site personality
-description: "Thoughts and insights on AI/ML, technology, and learning to make algorithms learn. Blog posts coming soon."
+description: "Thoughts and insights on AI/ML, technology, and learning to make algorithms learn. Blog posts hosted on Notion."
 # OPEN GRAPH TYPE
 # "website" type appropriate for blog landing/index pages
 og_type: "website"
@@ -17,96 +17,121 @@ og_type: "website"
 <h1>blogs</h1>
 
 <!-- 
-    BLOG POSTS LISTING
+    BLOG LINKS - NOTION HOSTED
     
-    Displays all published blog posts in reverse chronological order (newest first)
-    Uses Jekyll's site.posts collection which automatically includes all files in _posts/
+    This page displays links to blog posts hosted on Notion
+    Uses data-driven approach with _data/blogs.yml for easy content management
     
-    JEKYLL POSTS COLLECTION:
-    - Automatically sorted by date (newest first)
-    - Only includes files with valid YYYY-MM-DD-title.md filename format
-    - Respects published: false in front matter (drafts)
-    - Provides date, title, excerpt, categories, tags, etc.
+    WHY EXTERNAL HOSTING (NOTION)?
+    - Notion provides rich editing experience with blocks and embeds
+    - Easy to write and format without dealing with markdown/HTML
+    - Built-in collaboration features for drafts and reviews
+    - No need to rebuild/redeploy Jekyll site for new posts
+    - Notion's sharing features handle comments and engagement
+    
+    DATA-DRIVEN APPROACH:
+    - All blog metadata stored in _data/blogs.yml
+    - Add new posts by editing YAML file (no HTML changes)
+    - Consistent card formatting across all posts
+    - Can sort by date, filter by tags, etc.
     
     CONDITIONAL DISPLAY:
-    - If posts exist: Display them in preview cards
-    - If no posts: Show "coming soon" message
-    - This allows the page to work before and after posts are added
+    - If blogs exist in data file: Display them in cards
+    - If no blogs yet: Show "coming soon" message
+    - This allows the page to work before and after blogs are added
 -->
 
-{% if site.posts.size > 0 %}
+{% if site.data.blogs.size > 0 %}
     <!-- 
-        BLOG POST PREVIEWS
-        Each post gets a preview card with:
-        - Title (clickable link to full post)
-        - Publication date and reading time
-        - Excerpt (first paragraph or custom excerpt from front matter)
-        - "Read more" link
+        BLOG LINK CARDS
+        Each blog gets a card with:
+        - Title (clickable link to Notion page)
+        - Publication date
+        - Description/excerpt
+        - Tags (if provided)
+        - External link indicator (arrow)
     -->
     <div class="blog-list">
-        {% for post in site.posts %}
+        {% for blog in site.data.blogs %}
         <article class="blog-preview">
             <!-- 
-                POST TITLE
-                Links to individual post page
-                Jekyll automatically generates post URLs based on date and title
-                Default format: /YYYY/MM/DD/title/
+                BLOG TITLE
+                Links to external Notion page
+                Opens in new tab to preserve user's place on portfolio site
+                target="_blank" with rel="noopener noreferrer" for security
             -->
             <h2 class="preview-title">
-                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                <a href="{{ blog.url }}" target="_blank" rel="noopener noreferrer">
+                    {{ blog.title }}
+                    <!-- External link indicator - shows it opens in new tab -->
+                    <span style="font-size: 0.8em; opacity: 0.6;">↗</span>
+                </a>
             </h2>
             
             <!-- 
-                POST METADATA
-                Shows publication date and optional reading time
+                BLOG METADATA
+                Shows publication date and optional tags
                 Date format: "January 15, 2025" (human-readable)
             -->
             <div class="preview-meta">
-                <time datetime="{{ post.date | date_to_xmlschema }}">
-                    {{ post.date | date: "%B %d, %Y" }}
+                {% if blog.date %}
+                <!-- 
+                    Convert YYYY-MM-DD date string to readable format
+                    Jekyll's date filter needs a proper date object
+                    Append "-01" to create valid date for day of month
+                -->
+                {% assign date_parts = blog.date | split: "-" %}
+                {% assign date_string = blog.date | append: "-01" %}
+                <time datetime="{{ blog.date }}">
+                    {{ date_string | date: "%B %d, %Y" }}
                 </time>
-                {% if post.read_time %}
+                {% endif %}
+                
+                <!-- 
+                    TAGS DISPLAY
+                    Shows topic tags for content categorization
+                    Inline display for compact presentation
+                -->
+                {% if blog.tags %}
                 <span class="separator">·</span>
-                <span>{{ post.read_time }} min read</span>
+                <span class="tags">
+                    {% for tag in blog.tags %}
+                        <span class="tag">{{ tag }}</span>{% unless forloop.last %}, {% endunless %}
+                    {% endfor %}
+                </span>
                 {% endif %}
             </div>
             
             <!-- 
-                POST EXCERPT
-                First paragraph or custom excerpt defined in front matter
-                Gives readers a preview of the content before clicking
-                strip_html removes any HTML tags for clean text
+                BLOG DESCRIPTION
+                Brief summary of the post content
+                Helps readers decide if they want to click through
             -->
+            {% if blog.description %}
             <p class="preview-excerpt">
-                {{ post.excerpt | strip_html | truncatewords: 50 }}
+                {{ blog.description }}
             </p>
+            {% endif %}
             
             <!-- 
-                READ MORE LINK
-                Clear call-to-action to read the full post
+                READ ON NOTION LINK
+                Clear call-to-action to visit Notion page
                 Arrow (→) provides visual direction cue
+                Opens in new tab to avoid navigation away from portfolio
             -->
-            <a href="{{ post.url | relative_url }}" class="read-more">read more →</a>
+            <a href="{{ blog.url }}" target="_blank" rel="noopener noreferrer" class="read-more">
+                read on notion →
+            </a>
         </article>
         {% endfor %}
     </div>
     
-    <!-- 
-        RSS FEED SUBSCRIPTION LINK
-        Allows readers to subscribe via RSS feed
-        jekyll-feed plugin automatically generates feed.xml
-    -->
-    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px dotted var(--border-color);">
-        <p style="color: var(--text-secondary); font-size: 0.95rem;">
-            subscribe via <a href="{{ '/feed.xml' | relative_url }}" target="_blank">rss feed</a>
-        </p>
-    </div>
-    
 {% else %}
     <!-- 
-        NO POSTS YET MESSAGE
-        Displays when _posts directory is empty or all posts are drafts
+        NO BLOGS YET MESSAGE
+        Displays when _data/blogs.yml is empty
         Maintains casual, personality-driven tone
+        Explains that blogs will be hosted on Notion
     -->
-    <p class="coming-soon">posts coming soon. still figuring out what to write about.</p>
+    <p class="coming-soon">blog posts coming soon. writing stuff on notion and will link them here.</p>
 {% endif %}
