@@ -8,33 +8,65 @@ permalink: /experience/
 
 <h1>experience</h1>
 
+<!-- 
+    EXPERIENCE SECTION - DATA-DRIVEN CONTENT
+    
+    This section dynamically generates experience cards from _data/experiences.yml
+    
+    BENEFITS OF DATA FILES:
+    - Easy content updates: Just edit experiences.yml, no HTML changes needed
+    - Consistent formatting: Template ensures all entries look the same
+    - Maintainability: Content separated from presentation logic
+    - Scalability: Adding new experience is just adding YAML entries
+    
+    LOOP STRUCTURE:
+    - Iterates through site.data.experiences array
+    - Each iteration creates one experience card
+    - Data attributes (data-start, data-end) enable duration calculator
+    - Duration calculator JavaScript reads these and displays time spans
+    
+    DATE FORMATTING:
+    - Uses Jekyll's date filter to convert YYYY-MM to human-readable format
+    - Example: "2025-04" becomes "Apr 2025"
+    - Format string "%b %Y" = abbreviated month name + 4-digit year
+-->
 <div class="experience-section">
+    {% for exp in site.data.experiences %}
     <div class="experience-item">
-        <h2>NextTechLab</h2>
-        <p class="duration" data-start="2025-04" data-end="present">Apr 2025 - Present · <span class="duration-calc"></span></p>
+        <!-- Organization name as heading -->
+        <h2>{{ exp.organization }}</h2>
+        
+        <!-- 
+            Duration display with data attributes
+            - data-start and data-end enable JavaScript duration calculation
+            - Format: "Apr 2025 - Present · X yrs Y mos"
+            - .duration-calc span filled by duration-calculator.js
+        -->
+        <p class="duration" data-start="{{ exp.start_date }}" data-end="{{ exp.end_date }}">
+            {% assign start_parts = exp.start_date | split: "-" %}
+            {% assign start_year = start_parts[0] %}
+            {% assign start_month = start_parts[1] %}
+            {% assign start_date_obj = start_year | append: "-" | append: start_month | append: "-01" | date: "%s" %}
+            {{ start_date_obj | date: "%b %Y" }} - 
+            {% if exp.end_date == "present" %}
+                Present
+            {% else %}
+                {% assign end_parts = exp.end_date | split: "-" %}
+                {% assign end_year = end_parts[0] %}
+                {% assign end_month = end_parts[1] %}
+                {% assign end_date_obj = end_year | append: "-" | append: end_month | append: "-01" | date: "%s" %}
+                {{ end_date_obj | date: "%b %Y" }}
+            {% endif %}
+             · <span class="duration-calc"></span>
+        </p>
+        
+        <!-- Role and description -->
         <div class="role-info">
-            <p class="role"><strong>Role:</strong> Associate</p>
-            <p class="description">Part of the McCarthy Lab, strengthening my roots in AI and ML.</p>
+            <p class="role"><strong>Role:</strong> {{ exp.role }}</p>
+            <p class="description">{{ exp.description }}</p>
         </div>
     </div>
-
-    <div class="experience-item">
-        <h2>Foresight-X</h2>
-        <p class="duration" data-start="2025-02" data-end="present">Feb 2025 - Present · <span class="duration-calc"></span></p>
-        <div class="role-info">
-            <p class="role"><strong>Role:</strong> Co-Founder</p>
-            <p class="description">Implementing AI/ML, Digital Twin technologies to predict natural calamities before they occur.</p>
-        </div>
-    </div>
-
-    <div class="experience-item">
-        <h2>KRUU</h2>
-        <p class="duration" data-start="2023-01" data-end="2023-06">Jan 2023 - Jun 2023 · <span class="duration-calc"></span></p>
-        <div class="role-info">
-            <p class="role"><strong>Role:</strong> Campus Ambassador</p>
-            <p class="description">Fellow of the KRUU & Mindler Maker Fellowship.</p>
-        </div>
-    </div>
+    {% endfor %}
 </div>
 
 <!-- 
