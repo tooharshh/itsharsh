@@ -4,10 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
+    
+    <!-- 
+        FAVICON LINKS
+        Multiple formats for cross-browser compatibility
+        ?v=1 query parameter helps with cache busting when favicon changes
+    -->
     <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=1" type="image/x-icon">
     <link rel="shortcut icon" href="{{ '/favicon.ico' | relative_url }}?v=1" type="image/x-icon">
     <link rel="apple-touch-icon" href="{{ '/favicon.ico' | relative_url }}">
+    
+    <!-- 
+        PERFORMANCE OPTIMIZATIONS - DNS Prefetch & Preconnect
+        These resource hints tell the browser to establish early connections
+        Reduces latency for external resources (fonts from Google)
+        
+        dns-prefetch: Resolves DNS early (low-cost hint for older browsers)
+        preconnect: Full connection setup including TLS handshake (higher cost but faster)
+        
+        Why both? Fallback support - preconnect for modern browsers, dns-prefetch for older
+        Performance gain: ~100-300ms saved on font loading
+    -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- 
+        STYLESHEET LOADING
+        Main site styles - blocking load for FOUC prevention
+        Loaded before font to ensure proper rendering
+    -->
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+    
+    <!-- 
+        FONT LOADING - Google Fonts
+        Space Mono (monospace) with all weights and styles
+        display=swap ensures text remains visible during font load (prevents FOIT)
+        
+        Performance considerations:
+        - Only loads necessary font weights (400, 700) and styles (normal, italic)
+        - Uses font-display: swap in CSS for fallback rendering
+        - Combined with preconnect for faster load
+    -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <!-- 
         ANTI-FOUC (Flash of Unstyled Content) SCRIPT
