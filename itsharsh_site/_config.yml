@@ -12,27 +12,137 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 #
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# ==============================================================================
+# SITE SETTINGS
+# ==============================================================================
+# These settings personalize the site and are accessible in templates
+# via {{ site.title }}, {{ site.email }}, etc.
+# 
+# RESTART REQUIRED: Jekyll must be restarted after changing this file
+# The config is loaded once at server start for performance reasons
 
+# BASIC SITE INFORMATION
+# - title: Appears in browser tabs, search results, and social media
+# - tagline: Short descriptor used in meta descriptions
+# - description: Longer description for SEO and RSS feeds
 title: itsharsh
-email: your-email@domain.com
+tagline: AI/ML researcher working on earthquake early warning systems
 description: >-
   Learning how to make algorithms learn. Currently working on AI/ML for earthquake 
   early warning systems. Tinkering at foresight-x and NextTechLab.
-baseurl: ""
-url: ""
-twitter_username: ""
-github_username: tooharshh
 
-# Build settings
+# AUTHOR INFORMATION
+# Used by jekyll-seo-tag for schema.org markup and social meta tags
+# Helps search engines understand content authorship
+author:
+  name: Harsh Dudhatra
+  email: your-email@domain.com
+  twitter: ""  # Twitter handle without @ symbol
+  # Additional author fields (optional but recommended for rich snippets)
+  bio: AI/ML researcher focusing on earthquake early warning systems and digital twin technologies
+  location: India
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/tooharshh"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/harshdudhatra/"
+
+# URL CONFIGURATION
+# CRITICAL: Set 'url' to your actual domain for proper SEO
+# Examples:
+# - Production: url: "https://itsharsh.com"
+# - Netlify: url: "https://your-site.netlify.app"
+# baseurl: Use only if site is in a subdirectory (e.g., /blog)
+baseurl: ""
+url: ""  # TODO: Replace with actual production URL
+
+# SOCIAL MEDIA USERNAMES
+# Used by jekyll-seo-tag for social media meta tags
+# Leave blank if not applicable
+twitter_username: ""  # Your Twitter handle (without @)
+github_username: tooharshh
+linkedin_username: harshdudhatra  # Your LinkedIn username from profile URL
+
+# ==============================================================================
+# SEO & SOCIAL MEDIA SETTINGS
+# ==============================================================================
+# Configuration for jekyll-seo-tag plugin
+# Generates meta tags for search engines and social media platforms
+
+# LOGO AND IMAGES
+# Used in search results and when site is shared on social media
+# Recommended sizes:
+# - logo: 512x512px (square)
+# - social image: 1200x630px (Open Graph standard)
+logo: /assets/images/logo.png  # TODO: Add site logo
+social:
+  name: Harsh Dudhatra
+  links:
+    - https://github.com/tooharshh
+    - https://www.linkedin.com/in/harshdudhatra/
+
+# Open Graph and Twitter Card defaults
+# These create rich previews when links are shared on social platforms
+# Can be overridden per-page in front matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/og-default.png  # TODO: Add default Open Graph image
+      # Twitter card type: summary (small image) or summary_large_image (large image)
+      twitter:
+        card: summary
+        site: ""  # Your Twitter handle (with @)
+        creator: ""  # Your Twitter handle (with @)
+
+# SEO TAG SETTINGS
+# Fine-tune how jekyll-seo-tag generates meta tags
+# See: https://github.com/jekyll/jekyll-seo-tag
+seo:
+  type: Person  # Person, Organization, or WebSite
+  # For schema.org structured data
+  # Helps search engines understand what type of entity the site represents
+
+# ==============================================================================
+# JEKYLL FEED SETTINGS (RSS)
+# ==============================================================================
+# Configuration for jekyll-feed plugin
+# Generates RSS feed for blog posts (future use when blogs are implemented)
+feed:
+  excerpt_only: false  # Include full post content in feed
+  path: feed.xml       # Feed URL path (site.com/feed.xml)
+  # Specific categories to include in feed (optional)
+  # categories:
+  #   - blog
+  #   - tech
+
+# ==============================================================================
+# BUILD SETTINGS
+# ==============================================================================
 theme: minima
+
+# PLUGINS
+# Essential Jekyll plugins for modern website functionality
+# - jekyll-feed: Generates RSS feed for blog posts
+# - jekyll-seo-tag: Generates meta tags for SEO and social media
+# - jekyll-sitemap: Automatically generates sitemap.xml for search engines
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap  # Automatic sitemap generation
+
+# MARKDOWN PROCESSOR
+# kramdown is Jekyll's default and most feature-rich markdown processor
+# Configuration ensures proper rendering of code blocks and tables
+markdown: kramdown
+kramdown:
+  input: GFM  # GitHub Flavored Markdown for better compatibility
+  syntax_highlighter: rouge  # Code highlighting
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false  # Cleaner code blocks without line numbers
 
 # Exclude from processing.
 # The following items will not be processed, by default.
