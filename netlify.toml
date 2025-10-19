@@ -7,13 +7,113 @@
   RUBY_VERSION = "3.2.0"
   JEKYLL_ENV = "production"
 
+# ==============================================================================
+# SECURITY HEADERS (All Pages)
+# ==============================================================================
+# These headers protect against common web vulnerabilities
+# Applied to all pages for comprehensive security
+
 [[headers]]
   for = "/*"
   [headers.values]
+    # CLICKJACKING PROTECTION
+    # Prevents site from being embedded in iframes (protects against clickjacking attacks)
+    # DENY = complete blocking, SAMEORIGIN = allow only same domain
     X-Frame-Options = "DENY"
+    
+    # XSS PROTECTION
+    # Enables browser's built-in XSS filter (older browsers)
+    # Modern browsers have this enabled by default, but this ensures backward compatibility
     X-XSS-Protection = "1; mode=block"
+    
+    # MIME-TYPE SNIFFING PROTECTION
+    # Prevents browsers from interpreting files as different MIME type
+    # Stops malicious file uploads from executing as scripts
     X-Content-Type-Options = "nosniff"
+    
+    # REFERRER POLICY
+    # Controls how much referrer information is sent with requests
+    # strict-origin-when-cross-origin = full URL for same-origin, origin only for cross-origin
     Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # PERMISSIONS POLICY (formerly Feature-Policy)
+    # Disables unnecessary browser features for security and privacy
+    # Reduces attack surface by blocking unused APIs
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=()"
+    
+    # CONTENT SECURITY POLICY (CSP)
+    # Strict policy to prevent XSS and data injection attacks
+    # Note: Adjust if adding external scripts (analytics, etc.)
+    # Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'"
+
+# ==============================================================================
+# PERFORMANCE HEADERS (Static Assets)
+# ==============================================================================
+# Optimize caching and compression for static assets
+# Improves load times and reduces bandwidth usage
+
+# CSS FILES - Long cache with fingerprinting
+# Cache for 1 year since Jekyll uses content hashing for cache busting
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    # Tell browsers this file won't change (immutable)
+    # Content hash in filename ensures new version = new filename
+
+# JAVASCRIPT FILES - Long cache with fingerprinting
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    # Same strategy as CSS - hash-based cache busting
+
+# IMAGES - Long cache (images rarely change)
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    # Aggressive caching for images
+    # If image needs to change, use different filename
+
+# FONTS - Extra long cache (fonts never change)
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    # Fonts are perfect for permanent caching
+
+# HTML PAGES - Short cache with revalidation
+# Allows quick updates while still benefiting from caching
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    # Always revalidate with server before using cached version
+    # Ensures users get latest content quickly
+
+# RSS FEED - Short cache for fresh content
+[[headers]]
+  for = "/feed.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    # 1 hour cache - balance between freshness and performance
+    Content-Type = "application/xml; charset=utf-8"
+
+# SITEMAP - Daily cache (changes infrequently)
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    # 24 hour cache - sitemaps don't change often
+    Content-Type = "application/xml; charset=utf-8"
+
+# ROBOTS.TXT - Weekly cache (rarely changes)
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+    # 7 day cache - robots.txt is very stable
 
 # REDIRECTS
 # Redirect old /itsharsh/* URLs to clean URLs for backward compatibility
