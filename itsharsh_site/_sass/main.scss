@@ -486,6 +486,112 @@ html.dark-mode body .project-card:hover {
 }
 
 /* 
+ * PAPERS SECTION STYLING
+ * Card-based layout for research papers, matching the projects section design
+ * Uses CSS Grid for responsive card placement with consistent spacing
+ */
+.papers-grid {
+    display: grid;
+    /* 
+     * Single column by default for mobile-first approach
+     * Gap creates consistent spacing between paper cards
+     */
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* 
+ * PAPER CARD COMPONENT
+ * Individual paper container with dotted border (matching project cards)
+ * Features hover effects for better interaction feedback
+ * Includes smooth transitions for professional appearance
+ */
+.paper-card {
+    border: 2px dotted var(--text-color);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: var(--bg-color);
+    /* 
+     * Transition all properties for smooth hover effects
+     * Border style, shadow, and transform all animate together
+     */
+    transition: all 0.3s ease;
+
+    /* 
+     * Hover state provides visual feedback for interactivity
+     * Dashed border + subtle shadow + slight lift creates depth
+     * Transform translateY(-1px) gives a "lifting" effect
+     */
+    &:hover {
+        border-style: dashed;
+        border-color: var(--text-secondary);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transform: translateY(-1px);
+    }
+
+    /* 
+     * Paper title styling - consistent with project cards
+     * Margin-bottom for spacing, margin-top 0 prevents double spacing
+     */
+    h3 {
+        margin-bottom: 1rem;
+        margin-top: 0;
+    }
+
+    /* 
+     * Paper metadata paragraph (type, conference, year)
+     * Secondary color for visual hierarchy
+     * Bottom margin removed to prevent excessive spacing
+     */
+    .paper-meta {
+        margin-bottom: 0.75rem;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+
+        /* 
+         * Conference links within metadata maintain underline style
+         * Consistent with site's overall link treatment
+         */
+        a {
+            color: var(--text-color);
+            text-decoration: underline;
+
+            &:hover {
+                color: var(--text-secondary);
+            }
+        }
+    }
+
+    /* 
+     * "Read Paper" link container
+     * Provides clear call-to-action at bottom of each card
+     */
+    .paper-link {
+        margin-bottom: 0;
+        
+        /* 
+         * Underline class provides consistent link styling
+         * Arrow (→) indicates external navigation
+         */
+        a {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+    }
+}
+
+/* 
+ * DARK MODE ADJUSTMENTS FOR PAPERS
+ * Lighter shadow for dark backgrounds - improves visibility
+ * Matches the dark mode treatment for project cards
+ */
+body.dark-mode .paper-card:hover,
+html.dark-mode body .paper-card:hover {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
+}
+
+/* 
  * TABLET RESPONSIVE STYLES (768px and below)
  * Adjusts layout for medium-sized screens like tablets and small laptops
  */
@@ -548,6 +654,16 @@ html.dark-mode body .project-card:hover {
     .theme-toggle {
         margin-left: auto;
     }
+
+    /* 
+     * PAPERS GRID - Tablet responsive
+     * Maintain single column layout for readability
+     * Cards get full width to accommodate longer paper titles
+     */
+    .papers-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem; // Slightly reduced gap to save vertical space
+    }
 }
 
 /* 
@@ -585,11 +701,23 @@ html.dark-mode body .project-card:hover {
     
     /* 
      * CONTENT CARDS - Full width on mobile
-     * Experience items and project cards take full available width
+     * Experience items, project cards, and paper cards take full available width
      * Reduce padding to maximize content space without feeling cramped
      */
     .experience-item,
-    .project-card {
+    .project-card,
+    .paper-card {
         padding: 1rem;
+    }
+
+    /* 
+     * PAPERS GRID - Mobile responsive
+     * Single column layout maintained for mobile phones
+     * Further reduced gap to save vertical scrolling space
+     * Paper cards remain comfortable to tap and read
+     */
+    .papers-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 }
