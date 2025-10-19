@@ -24,11 +24,18 @@
         <div class="container">
             <header class="site-header">
                 <nav class="navigation">
+                <!-- 
+                    NAVIGATION LINKS
+                    - Using clean URLs without /itsharsh/ prefix for better SEO and cleaner structure
+                    - relative_url filter ensures proper baseurl handling across environments
+                    - Active state detection uses page.url to highlight current page
+                    - Trailing slashes in comparison are important for Jekyll's URL structure
+                -->
                 <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">home</a>
-                <a href="{{ '/itsharsh/experience' | relative_url }}" class="nav-link {% if page.url == '/itsharsh/experience/' %}active{% endif %}">experience</a>
-                <a href="{{ '/itsharsh/projects' | relative_url }}" class="nav-link {% if page.url == '/itsharsh/projects/' %}active{% endif %}">projects</a>
-                <a href="{{ '/itsharsh/papers' | relative_url }}" class="nav-link {% if page.url == '/itsharsh/papers/' %}active{% endif %}">papers</a>
-                <a href="{{ '/itsharsh/blogs' | relative_url }}" class="nav-link {% if page.url == '/itsharsh/blogs/' %}active{% endif %}">blogs</a>
+                <a href="{{ '/experience/' | relative_url }}" class="nav-link {% if page.url == '/experience/' %}active{% endif %}">experience</a>
+                <a href="{{ '/projects/' | relative_url }}" class="nav-link {% if page.url == '/projects/' %}active{% endif %}">projects</a>
+                <a href="{{ '/papers/' | relative_url }}" class="nav-link {% if page.url == '/papers/' %}active{% endif %}">papers</a>
+                <a href="{{ '/blogs/' | relative_url }}" class="nav-link {% if page.url == '/blogs/' %}active{% endif %}">blogs</a>
             </nav>
             <div class="header-actions">
                 <div class="social-links">
