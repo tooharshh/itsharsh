@@ -1,0 +1,68 @@
+# ROBOTS.TXT - Search Engine Crawler Instructions
+# This file tells search engine bots which parts of the site to crawl
+# 
+# WHY THIS FILE EXISTS:
+# - Improves crawl efficiency by directing bots to important pages
+# - Prevents bots from wasting resources on administrative files
+# - Provides sitemap location for faster indexing
+# - Standard practice for professional websites
+#
+# SYNTAX:
+# - User-agent: Specifies which bot the rules apply to (* = all bots)
+# - Allow: Explicitly permits crawling of a path
+# - Disallow: Prevents crawling of a path
+# - Sitemap: Points to XML sitemap for efficient indexing
+
+# ==============================================================================
+# RULES FOR ALL SEARCH ENGINES
+# ==============================================================================
+User-agent: *
+
+# ALLOW: Public pages that should appear in search results
+# These are the main content pages users search for
+Allow: /
+Allow: /experience/
+Allow: /projects/
+Allow: /papers/
+Allow: /blogs/
+
+# DISALLOW: Development and system files
+# These files are not useful to searchers and waste crawl budget
+Disallow: /_site/       # Jekyll build output (should not be deployed anyway)
+Disallow: /assets/      # CSS, JS, images (not needed in search results)
+Disallow: /.git/        # Git repository files (should not be deployed)
+Disallow: /Gemfile      # Ruby dependency file
+Disallow: /Gemfile.lock # Ruby lock file
+Disallow: /.jekyll-cache/ # Jekyll cache directory
+
+# ==============================================================================
+# SITEMAP LOCATION
+# ==============================================================================
+# Jekyll automatically generates sitemap.xml via jekyll-seo-tag plugin
+# This tells search engines where to find it for efficient crawling
+# TODO: Update URL to actual production domain when deployed
+Sitemap: https://your-site.com/sitemap.xml
+
+# ==============================================================================
+# CRAWL RATE LIMITING (Optional)
+# ==============================================================================
+# Most search engines respect these directives to avoid overloading servers
+# Usually not necessary for small sites, but good practice
+
+# CRAWL-DELAY: Seconds to wait between requests (optional)
+# Uncomment if experiencing server load issues from crawlers
+# Crawl-delay: 1
+
+# ==============================================================================
+# NOTES FOR SPECIFIC BOTS
+# ==============================================================================
+# If needed, you can add specific rules for individual bots:
+#
+# User-agent: Googlebot
+# Allow: /
+#
+# User-agent: Bingbot
+# Allow: /
+#
+# User-agent: GPTBot  # OpenAI's web crawler
+# Disallow: /         # Uncomment to block AI training
