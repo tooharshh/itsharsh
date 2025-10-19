@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        BLOG POST TITLE
+        Format: "Post Title - itsharsh"
+        Consistent branding while highlighting the specific post
+    -->
+    <title>{{ page.title }} - {{ site.title }}</title>
+    
+    <!-- Favicon links -->
+    <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=1" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ '/favicon.ico' | relative_url }}?v=1" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{{ '/favicon.ico' | relative_url }}">
+    
+    <!-- Performance optimization: DNS prefetch and preconnect for Google Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+    
+    <!-- Font loading with display=swap for better performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    
+    <!-- 
+        ANTI-FOUC (Flash of Unstyled Content) SCRIPT
+        Same theme initialization as default layout
+        Ensures blog posts respect user's theme preference
+    -->
+    <script>
+    (function() {
+        try {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        } catch (e) {
+            // Fail silently, default to light mode
+        }
+    })();
+    </script>
+    
+    <!-- 
+        SEO META TAGS
+        jekyll-seo-tag plugin automatically generates:
+        - Open Graph tags for social media previews
+        - Twitter Card meta tags
+        - Canonical URLs
+        - JSON-LD structured data for search engines
+        - Article schema for blog posts
+    -->
+    {% seo %}
+</head>
+<body>
+    <div class="outer-border">
+        <div class="container">
+            <!-- 
+                HEADER - Same as default layout
+                Consistent navigation across all pages
+            -->
+            <header class="site-header">
+                <nav class="navigation">
+                    <a href="{{ '/' | relative_url }}" class="nav-link">home</a>
+                    <a href="{{ '/experience/' | relative_url }}" class="nav-link">experience</a>
+                    <a href="{{ '/projects/' | relative_url }}" class="nav-link">projects</a>
+                    <a href="{{ '/papers/' | relative_url }}" class="nav-link">papers</a>
+                    <a href="{{ '/blogs/' | relative_url }}" class="nav-link active">blogs</a>
+                </nav>
+                <div class="header-actions">
+                    <div class="social-links">
+                        <a href="https://github.com/tooharshh" target="_blank" class="social-link">github</a>
+                        <a href="https://www.linkedin.com/in/harshdudhatra/" target="_blank" class="social-link">linkedin</a>
+                    </div>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                        <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="theme-icon" viewBox="0 0 16 16">
+                            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+                        </svg>
+                        <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="theme-icon hidden" viewBox="0 0 16 16">
+                            <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- 
+                BLOG POST CONTENT AREA
+                Main content section for individual blog posts
+            -->
+            <main class="content">
+                <!-- 
+                    BLOG POST HEADER
+                    Displays post title and metadata (date, reading time, tags)
+                -->
+                <article class="blog-post">
+                    <!-- 
+                        POST TITLE
+                        H1 heading for SEO and accessibility
+                        Main subject of the page for search engines
+                    -->
+                    <header class="post-header">
+                        <h1 class="post-title">{{ page.title }}</h1>
+                        
+                        <!-- 
+                            POST METADATA
+                            Publication date, reading time estimate, categories/tags
+                            Helps readers decide if they want to invest time reading
+                        -->
+                        <div class="post-meta">
+                            <!-- 
+                                PUBLICATION DATE
+                                Human-readable format: "January 15, 2025"
+                                Also includes machine-readable datetime for SEO
+                            -->
+                            <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+                                {{ page.date | date: "%B %d, %Y" }}
+                            </time>
+                            
+                            <!-- 
+                                READING TIME (Optional)
+                                Calculated based on average reading speed (200 words/min)
+                                Only display if read_time is defined in front matter
+                            -->
+                            {% if page.read_time %}
+                            <span class="separator">·</span>
+                            <span class="read-time">{{ page.read_time }} min read</span>
+                            {% endif %}
+                            
+                            <!-- 
+                                CATEGORIES/TAGS
+                                Displays post categories for content organization
+                                Useful for filtering and navigation when blog grows
+                            -->
+                            {% if page.categories %}
+                            <span class="separator">·</span>
+                            <span class="categories">
+                                {% for category in page.categories %}
+                                    <span class="category">{{ category }}</span>{% unless forloop.last %}, {% endunless %}
+                                {% endfor %}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </header>
+                    
+                    <!-- 
+                        POST CONTENT
+                        Main blog post body content
+                        Uses .post-content class for specific styling (wider paragraphs, etc.)
+                    -->
+                    <div class="post-content">
+                        {{ content }}
+                    </div>
+                    
+                    <!-- 
+                        POST FOOTER
+                        Additional metadata, tags, share buttons (future enhancement)
+                    -->
+                    <footer class="post-footer">
+                        <!-- 
+                            TAGS DISPLAY
+                            Smaller, more granular categorization than categories
+                            Useful for topic-based navigation and SEO
+                        -->
+                        {% if page.tags %}
+                        <div class="post-tags">
+                            <span class="tags-label">tagged with:</span>
+                            {% for tag in page.tags %}
+                                <span class="tag">{{ tag }}</span>{% unless forloop.last %}, {% endunless %}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        
+                        <!-- 
+                            BACK TO BLOGS LINK
+                            Simple navigation back to blog index
+                            Arrow provides visual direction cue
+                        -->
+                        <div class="post-navigation">
+                            <a href="{{ '/blogs/' | relative_url }}" class="back-link">← back to all posts</a>
+                        </div>
+                    </footer>
+                </article>
+            </main>
+        </div>
+    </div>
+
+    <!-- Theme toggle JavaScript -->
+    <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
+</body>
+</html>
