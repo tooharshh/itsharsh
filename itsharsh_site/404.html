@@ -3,11 +3,53 @@ permalink: /404.html
 layout: default
 ---
 
+<!-- 
+  404 ERROR PAGE
+  Personality-driven error page that matches the site's satirical, playful tone
+  while remaining functional and helpful
+  
+  Design decisions:
+  - Lowercase text maintains consistency with site's casual aesthetic
+  - Playful copy reflects the "extroverted, satirical" personality
+  - Still provides clear navigation back to home
+  - Uses inline styles to ensure rendering even if CSS fails
+  - Maintains accessibility with semantic HTML
+-->
+
 <div style="text-align: center; margin: 4rem 0;">
+  <!-- 
+    LARGE 404 HEADING
+    Traditional error code but sized for impact
+    4em matches the hero text sizing for consistency
+  -->
   <h1 style="font-size: 4em; margin-bottom: 1rem;">404</h1>
-  <p style="font-size: 1.2rem; margin-bottom: 0.5rem;"><strong>Page not found :(</strong></p>
-  <p style="color: var(--text-secondary);">The requested page could not be found.</p>
+  
+  <!-- 
+    PRIMARY ERROR MESSAGE
+    Playful, satirical tone: "coffee break" humanizes the error
+    Lowercase styling maintains site's casual, minimalist aesthetic
+    Bold text ensures readability and importance
+  -->
+  <p style="font-size: 1.2rem; margin-bottom: 0.5rem;"><strong>oops, this page went on a coffee break</strong></p>
+  
+  <!-- 
+    SECONDARY MESSAGE
+    Self-deprecating humor: "and forgot to come back"
+    Adds personality while acknowledging the error
+    Uses secondary color for visual hierarchy
+    "typical." adds dry, satirical touch
+  -->
+  <p style="color: var(--text-secondary);">and forgot to come back. typical.</p>
+  
+  <!-- 
+    NAVIGATION BACK TO HOME
+    Playful copy continues the personality: "pretend this never happened"
+    Uses relative_url filter for proper baseurl handling
+    Arrow (←) provides visual direction cue
+    Maintains site's link styling with underline
+    Generous top margin creates visual separation
+  -->
   <p style="margin-top: 2rem;">
-    <a href="{{ '/' | relative_url }}" style="color: var(--text-color); text-decoration: underline;">← Back to home</a>
+    <a href="{{ '/' | relative_url }}" style="color: var(--text-color); text-decoration: underline;">← let's go home and pretend this never happened</a>
   </p>
 </div>
