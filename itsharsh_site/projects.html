@@ -8,14 +8,46 @@ permalink: /projects/
 
 <h1>projects</h1>
 
-<div class="projects-grid">
-    <div class="project-card">
-        <h3><a href="https://github.com/tooharshh/sentiva" target="_blank" class="underline">Sentiva</a></h3>
-        <p>A tool to interpret sentiment trends for daily news articles through VADER analysis.</p>
-    </div>
+<!-- 
+    PROJECTS SECTION - DATA-DRIVEN CONTENT
     
+    This section dynamically generates project cards from _data/projects.yml
+    
+    BENEFITS OF DATA FILES:
+    - Add new projects by editing projects.yml (no HTML changes)
+    - Consistent card formatting across all projects
+    - Easy to reorder projects (just reorder in YAML)
+    - Can add filtering/sorting features in future
+    - Content can be reused (e.g., in a resume generator)
+    
+    LOOP STRUCTURE:
+    - Iterates through site.data.projects array
+    - Each project gets a card with title, link, and description
+    - Links open in new tab (target="_blank") for external resources
+    - Underline class adds visual emphasis to project titles
+    
+    LINK HANDLING:
+    - External links (GitHub, Google Drive, etc.) open in new tab
+    - Maintains user's place on the portfolio site
+    - Standard web UX practice for external navigation
+-->
+<div class="projects-grid">
+    {% for project in site.data.projects %}
     <div class="project-card">
-        <h3><a href="https://drive.google.com/file/d/1294Fsk8fFz9YbX3suSwXb17PhhO4Pyik/view?usp=sharing" target="_blank" class="underline">Varman</a></h3>
-        <p>Prototype for a public health response platform, made using Figma.</p>
+        <!-- 
+            Project title as clickable link
+            - Opens in new tab to preserve user's place on site
+            - Underline class provides visual emphasis (defined in main.scss)
+            - Title from projects.yml data file
+        -->
+        <h3><a href="{{ project.url }}" target="_blank" class="underline">{{ project.title }}</a></h3>
+        
+        <!-- 
+            Project description
+            - Brief summary from projects.yml
+            - Uses secondary text color for visual hierarchy
+        -->
+        <p>{{ project.description }}</p>
     </div>
+    {% endfor %}
 </div>
