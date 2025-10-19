@@ -9,14 +9,36 @@
     <link rel="apple-touch-icon" href="{{ '/favicon.ico' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- 
+        ANTI-FOUC (Flash of Unstyled Content) SCRIPT
+        This inline script MUST remain in <head> to prevent theme flashing
+        
+        Why inline instead of external?
+        - Must execute BEFORE page renders to prevent white flash in dark mode
+        - External scripts load asynchronously, causing visible delay
+        - This is the ONLY inline script justified for performance reasons
+        
+        What it does:
+        - Checks localStorage for saved theme preference
+        - Applies dark-mode class to <html> immediately if needed
+        - Runs before any CSS or content loads
+        
+        Note: Full theme toggle logic is in external theme-toggle.js
+        This is just the minimal code needed to prevent FOUC
+    -->
     <script>
     (function() {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.documentElement.classList.add('dark-mode');
+        try {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        } catch (e) {
+            // If localStorage fails (private browsing), default to light mode
+            // No console.warn here to keep this script minimal and fast
         }
     })();
-</script>
+    </script>
     {% seo %}
 </head>
 <body>
@@ -58,39 +80,17 @@
         </main>
     </div>
 
-    <script>
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('theme-toggle');
-    const sunIcon = document.getElementById('sun-icon');
-    const moonIcon = document.getElementById('moon-icon');
-    const body = document.body;
-
-    // Check for saved theme or default to light mode
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    
-    // Apply saved theme on page load (sync with head script)
-    if (savedTheme === 'dark') {
-        body.classList.add('dark-mode');
-        document.documentElement.classList.add('dark-mode');
-        sunIcon.classList.add('hidden');
-        moonIcon.classList.remove('hidden');
-    }
-
-    // Theme toggle event listener
-    themeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        document.documentElement.classList.toggle('dark-mode');
+    <!-- 
+        THEME TOGGLE SCRIPT
+        External JavaScript for theme switching functionality
         
-        if (body.classList.contains('dark-mode')) {
-            sunIcon.classList.add('hidden');
-            moonIcon.classList.remove('hidden');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            sunIcon.classList.remove('hidden');
-            moonIcon.classList.add('hidden');
-            localStorage.setItem('theme', 'light');
-        }
-    });
-</script>
+        Why at end of body?
+        - Ensures all DOM elements exist before script runs
+        - Doesn't block page rendering
+        - Better for caching (browser can cache this file)
+        
+        See assets/js/theme-toggle.js for full implementation with error handling
+    -->
+    <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
 </body>
 </html>
