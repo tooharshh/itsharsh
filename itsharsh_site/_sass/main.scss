@@ -23,6 +23,25 @@ html.dark-mode body {
     box-sizing: border-box;
 }
 
+/* 
+ * BODY ELEMENT - Base Styling
+ * 
+ * FONT LOADING OPTIMIZATION:
+ * - Space Mono loaded from Google Fonts with display=swap parameter
+ * - display=swap prevents FOIT (Flash of Invisible Text)
+ * - Shows system monospace immediately, swaps when web font loads
+ * - No layout shift since both are monospace fonts
+ * 
+ * FONT STACK:
+ * - Primary: "Space Mono" (custom web font from Google Fonts)
+ * - Fallback: monospace (system font - Courier, Consolas, Menlo, Monaco)
+ * - Matching metrics prevent layout shift during font swap
+ * 
+ * THEME TRANSITIONS:
+ * - Smooth color transitions for light/dark mode switching
+ * - Only animates color properties for performance
+ * - 0.3s duration provides perceptible but not sluggish transition
+ */
 body {
     font-family: "Space Mono", monospace;
     background-color: var(--bg-color);
@@ -720,4 +739,406 @@ html.dark-mode body .paper-card:hover {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
+
+    /* 
+     * BLOG POST - Mobile responsive
+     * Optimize reading experience on small screens
+     */
+    .post-title {
+        font-size: 1.75rem;  // Smaller title for mobile readability
+    }
+
+    .post-meta {
+        font-size: 0.85rem;  // Slightly smaller metadata text
+        flex-wrap: wrap;     // Allow metadata to wrap on very small screens
+    }
+}
+
+/* 
+ * ==============================================================================
+ * BLOG POST STYLES
+ * ==============================================================================
+ * Styling for individual blog post pages
+ * Focuses on readability with optimal line length and spacing
+ */
+
+/* 
+ * BLOG POST CONTAINER
+ * Main article wrapper with semantic HTML5 article element
+ */
+.blog-post {
+    max-width: 700px;  // Optimal line length for reading (50-75 characters)
+    margin: 0 auto;    // Center the content
+    padding: 2rem 0;   // Vertical breathing room
+}
+
+/* 
+ * POST HEADER SECTION
+ * Contains title and metadata (date, reading time, categories)
+ * Border bottom creates visual separation from content
+ */
+.post-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px dotted var(--border-color);
+}
+
+/* 
+ * POST TITLE
+ * Large, prominent heading for the blog post
+ * Uses same font as site but bigger for hierarchy
+ */
+.post-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.2;  // Tighter line height for large text
+    color: var(--text-color);
+}
+
+/* 
+ * POST METADATA
+ * Date, reading time, categories displayed horizontally
+ * Secondary color for visual hierarchy (less emphasis than title)
+ */
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    
+    /* 
+     * SEPARATOR DOTS
+     * Visual separators between metadata items (·)
+     * Subtle way to divide information without heavy punctuation
+     */
+    .separator {
+        color: var(--text-secondary);
+    }
+    
+    /* 
+     * READING TIME INDICATOR
+     * Helps readers decide if they have time to read now
+     * Based on average reading speed calculation
+     */
+    .read-time {
+        font-style: italic;
+    }
+    
+    /* 
+     * CATEGORIES DISPLAY
+     * Shows post categories for content organization
+     * Inline display for compact presentation
+     */
+    .categories {
+        .category {
+            font-weight: 500;
+            color: var(--text-color);
+            
+            &:hover {
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+/* 
+ * POST CONTENT AREA
+ * Main body of the blog post
+ * Enhanced typography for optimal reading experience
+ */
+.post-content {
+    font-size: 1.1rem;        // Slightly larger for comfortable reading
+    line-height: 1.8;         // Generous line height for readability
+    color: var(--text-color);
+    margin-bottom: 3rem;
+    
+    /* 
+     * PARAGRAPH SPACING
+     * Extra margin between paragraphs for visual breathing room
+     * Helps readers process information in chunks
+     */
+    p {
+        margin-bottom: 1.5rem;
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    
+    /* 
+     * HEADINGS WITHIN POST CONTENT
+     * Hierarchy for subheadings in blog posts
+     * Clear visual distinction between levels
+     */
+    h2 {
+        font-size: 1.75rem;
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-color);
+    }
+    
+    h3 {
+        font-size: 1.4rem;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+        color: var(--text-color);
+    }
+    
+    h4 {
+        font-size: 1.2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+    }
+    
+    /* 
+     * CODE BLOCKS
+     * Monospace font (already applied globally) with distinct background
+     * Helps code stand out from regular text
+     */
+    code {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
+        font-size: 0.9em;
+    }
+    
+    /* 
+     * DARK MODE CODE BLOCKS
+     * Lighter background for code in dark mode
+     */
+    body.dark-mode &,
+    html.dark-mode body & {
+        code {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    }
+    
+    /* 
+     * BLOCK CODE (PRE)
+     * Multi-line code blocks with scrolling for long lines
+     * Border matches site's dotted aesthetic
+     */
+    pre {
+        background-color: rgba(0, 0, 0, 0.05);
+        border: 1px dotted var(--border-color);
+        border-radius: 6px;
+        padding: 1rem;
+        overflow-x: auto;
+        margin-bottom: 1.5rem;
+        
+        code {
+            background-color: transparent;
+            padding: 0;
+        }
+    }
+    
+    /* 
+     * BLOCKQUOTES
+     * Quoted text with left border for visual distinction
+     * Italic styling emphasizes it's someone else's words
+     */
+    blockquote {
+        border-left: 3px solid var(--border-color);
+        padding-left: 1.5rem;
+        margin: 1.5rem 0;
+        font-style: italic;
+        color: var(--text-secondary);
+    }
+    
+    /* 
+     * LISTS
+     * Proper spacing and indentation for bullet/numbered lists
+     */
+    ul, ol {
+        margin-bottom: 1.5rem;
+        padding-left: 2rem;
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+    }
+    
+    /* 
+     * IMAGES IN POSTS
+     * Responsive images that don't overflow container
+     * Rounded corners match overall design aesthetic
+     */
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 6px;
+        margin: 1.5rem 0;
+        display: block;
+    }
+    
+    /* 
+     * LINKS IN POST CONTENT
+     * Inherit global link styles but ensure proper contrast
+     */
+    a {
+        color: var(--text-color);
+        text-decoration: underline;
+        
+        &:hover {
+            color: var(--text-secondary);
+        }
+    }
+}
+
+/* 
+ * POST FOOTER SECTION
+ * Contains tags, navigation, and other post metadata
+ * Border top creates visual separation from content
+ */
+.post-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px dotted var(--border-color);
+}
+
+/* 
+ * POST TAGS DISPLAY
+ * More granular categorization than categories
+ * Displayed as inline elements with commas
+ */
+.post-tags {
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    
+    .tags-label {
+        font-weight: 500;
+        margin-right: 0.5rem;
+    }
+    
+    .tag {
+        font-style: italic;
+        color: var(--text-color);
+        
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+
+/* 
+ * POST NAVIGATION
+ * Links to go back to blog index or navigate between posts
+ * Arrow provides clear visual direction
+ */
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .back-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.95rem;
+        
+        &:hover {
+            color: var(--text-color);
+            text-decoration: underline;
+        }
+    }
+}
+
+/* 
+ * BLOG INDEX PAGE STYLES
+ * For the main /blogs/ page listing all posts
+ */
+.blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* 
+ * BLOG POST PREVIEW CARD
+ * Compact card for blog post previews on index page
+ * Same dotted border styling as projects and papers
+ */
+.blog-preview {
+    border: 2px dotted var(--border-color);
+    padding: 1.5rem;
+    border-radius: 6px;
+    background-color: var(--bg-color);
+    transition: all 0.3s ease;
+    
+    &:hover {
+        border-style: dashed;
+        border-color: var(--text-secondary);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transform: translateY(-1px);
+    }
+    
+    /* 
+     * PREVIEW TITLE
+     * Clickable link to full post
+     */
+    .preview-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+        
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    
+    /* 
+     * PREVIEW METADATA
+     * Date and reading time in compact format
+     */
+    .preview-meta {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+    }
+    
+    /* 
+     * PREVIEW EXCERPT
+     * First paragraph or custom excerpt of the post
+     * Gives readers a taste of the content
+     */
+    .preview-excerpt {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+    
+    /* 
+     * READ MORE LINK
+     * Clear call-to-action to read the full post
+     */
+    .read-more {
+        color: var(--text-color);
+        text-decoration: underline;
+        font-weight: 500;
+        
+        &:hover {
+            color: var(--text-secondary);
+        }
+    }
+}
+
+/* 
+ * DARK MODE ADJUSTMENTS FOR BLOG COMPONENTS
+ * Lighter shadows for dark backgrounds
+ */
+body.dark-mode .blog-preview:hover,
+html.dark-mode body .blog-preview:hover {
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
 }
