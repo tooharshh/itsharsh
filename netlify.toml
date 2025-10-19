@@ -15,7 +15,11 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# REDIRECTS
+# Redirect old /itsharsh/* URLs to clean URLs for backward compatibility
+# This ensures any bookmarked or shared links with the old structure still work
+# Status 301 = permanent redirect (tells search engines the URL has moved permanently)
 [[redirects]]
   from = "/itsharsh/*"
   to = "/:splat"
-  status = 200
+  status = 301
