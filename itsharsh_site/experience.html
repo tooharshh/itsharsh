@@ -37,57 +37,17 @@ permalink: /experience/
     </div>
 </div>
 
-<script>
-function calculateDuration() {
-    const durationElements = document.querySelectorAll('.duration[data-start]');
+<!-- 
+    DURATION CALCULATOR SCRIPT
+    External JavaScript for automatic experience duration calculation
     
-    durationElements.forEach(element => {
-        const startDate = element.getAttribute('data-start');
-        const endDate = element.getAttribute('data-end');
-        
-        let startYear, startMonth;
-        [startYear, startMonth] = startDate.split('-').map(Number);
-        
-        let endYear, endMonth;
-        if (endDate === 'present') {
-            const now = new Date();
-            endYear = now.getFullYear();
-            endMonth = now.getMonth() + 1; // getMonth() returns 0-11
-        } else {
-            [endYear, endMonth] = endDate.split('-').map(Number);
-        }
-        
-        // Calculate total months
-        let totalMonths = (endYear - startYear) * 12 + (endMonth - startMonth) + 1;
-        
-        let durationText = '';
-        if (totalMonths === 1) {
-            durationText = '1 mo';
-        } else if (totalMonths < 12) {
-            durationText = `${totalMonths} mos`;
-        } else {
-            const years = Math.floor(totalMonths / 12);
-            const remainingMonths = totalMonths % 12;
-            
-            if (remainingMonths === 0) {
-                durationText = years === 1 ? '1 yr' : `${years} yrs`;
-            } else {
-                const yearText = years === 1 ? '1 yr' : `${years} yrs`;
-                const monthText = remainingMonths === 1 ? '1 mo' : `${remainingMonths} mos`;
-                durationText = `${yearText} ${monthText}`;
-            }
-        }
-        
-        const calcSpan = element.querySelector('.duration-calc');
-        if (calcSpan) {
-            calcSpan.textContent = durationText;
-        }
-    });
-}
-
-// Calculate duration on page load
-document.addEventListener('DOMContentLoaded', calculateDuration);
-
-// Update duration every day (only for present positions)
-setInterval(calculateDuration, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
-</script>
+    What it does:
+    - Calculates time spans between start and end dates
+    - Formats output in LinkedIn-style (e.g., "1 yr 3 mos")
+    - Handles ongoing positions with "present" as end date
+    - Updates daily for current positions
+    - Includes comprehensive error handling and validation
+    
+    See assets/js/duration-calculator.js for full implementation
+-->
+<script src="{{ '/assets/js/duration-calculator.js' | relative_url }}"></script>
