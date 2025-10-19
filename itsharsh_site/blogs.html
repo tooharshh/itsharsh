@@ -4,8 +4,109 @@ title: "Blogs - itsharsh"
 # Clean URL structure without /itsharsh/ prefix
 # This creates a simpler, more professional URL: yoursite.com/blogs/
 permalink: /blogs/
+# SEO META DESCRIPTION
+# Forward-looking description for future blog content
+# Keywords hint at potential topics: AI, ML, tech insights
+# Maintains casual, approachable tone consistent with site personality
+description: "Thoughts and insights on AI/ML, technology, and learning to make algorithms learn. Blog posts coming soon."
+# OPEN GRAPH TYPE
+# "website" type appropriate for blog landing/index pages
+og_type: "website"
 ---
 
 <h1>blogs</h1>
 
-<p class="coming-soon">coming soon</p>
+<!-- 
+    BLOG POSTS LISTING
+    
+    Displays all published blog posts in reverse chronological order (newest first)
+    Uses Jekyll's site.posts collection which automatically includes all files in _posts/
+    
+    JEKYLL POSTS COLLECTION:
+    - Automatically sorted by date (newest first)
+    - Only includes files with valid YYYY-MM-DD-title.md filename format
+    - Respects published: false in front matter (drafts)
+    - Provides date, title, excerpt, categories, tags, etc.
+    
+    CONDITIONAL DISPLAY:
+    - If posts exist: Display them in preview cards
+    - If no posts: Show "coming soon" message
+    - This allows the page to work before and after posts are added
+-->
+
+{% if site.posts.size > 0 %}
+    <!-- 
+        BLOG POST PREVIEWS
+        Each post gets a preview card with:
+        - Title (clickable link to full post)
+        - Publication date and reading time
+        - Excerpt (first paragraph or custom excerpt from front matter)
+        - "Read more" link
+    -->
+    <div class="blog-list">
+        {% for post in site.posts %}
+        <article class="blog-preview">
+            <!-- 
+                POST TITLE
+                Links to individual post page
+                Jekyll automatically generates post URLs based on date and title
+                Default format: /YYYY/MM/DD/title/
+            -->
+            <h2 class="preview-title">
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h2>
+            
+            <!-- 
+                POST METADATA
+                Shows publication date and optional reading time
+                Date format: "January 15, 2025" (human-readable)
+            -->
+            <div class="preview-meta">
+                <time datetime="{{ post.date | date_to_xmlschema }}">
+                    {{ post.date | date: "%B %d, %Y" }}
+                </time>
+                {% if post.read_time %}
+                <span class="separator">·</span>
+                <span>{{ post.read_time }} min read</span>
+                {% endif %}
+            </div>
+            
+            <!-- 
+                POST EXCERPT
+                First paragraph or custom excerpt defined in front matter
+                Gives readers a preview of the content before clicking
+                strip_html removes any HTML tags for clean text
+            -->
+            <p class="preview-excerpt">
+                {{ post.excerpt | strip_html | truncatewords: 50 }}
+            </p>
+            
+            <!-- 
+                READ MORE LINK
+                Clear call-to-action to read the full post
+                Arrow (→) provides visual direction cue
+            -->
+            <a href="{{ post.url | relative_url }}" class="read-more">read more →</a>
+        </article>
+        {% endfor %}
+    </div>
+    
+    <!-- 
+        RSS FEED SUBSCRIPTION LINK
+        Allows readers to subscribe via RSS feed
+        jekyll-feed plugin automatically generates feed.xml
+    -->
+    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px dotted var(--border-color);">
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">
+            subscribe via <a href="{{ '/feed.xml' | relative_url }}" target="_blank">rss feed</a>
+        </p>
+    </div>
+    
+{% else %}
+    <!-- 
+        NO POSTS YET MESSAGE
+        Displays when _posts directory is empty or all posts are drafts
+        Maintains casual, personality-driven tone
+    -->
+    <p class="coming-soon">posts coming soon. still figuring out what to write about.</p>
+{% endif %}

@@ -2,6 +2,18 @@
 layout: default
 title: "itsharsh"
 permalink: /
+# SEO META DESCRIPTION
+# This description appears in search engine results and social media previews
+# Best practices:
+# - Keep between 150-160 characters for optimal display in search results
+# - Include primary keywords naturally (AI/ML, earthquake warning)
+# - Make it compelling to encourage clicks
+# - Reflects the site's satirical, casual personality
+description: "AI/ML researcher learning to make algorithms learn. Working on earthquake early warning systems at foresight-x and NextTechLab."
+# OPEN GRAPH / SOCIAL MEDIA
+# These tags control how the page appears when shared on social platforms
+# og:type Person indicates this is a personal portfolio/profile
+og_type: "profile"
 ---
 
 <div class="hero">
