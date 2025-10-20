@@ -46,10 +46,8 @@ og_type: "profile"
         <h2>{{ exp.organization }}</h2>
         
         <!-- 
-            Duration display with data attributes
-            - data-start and data-end enable JavaScript duration calculation
-            - Format: "Apr 2025 - Present · X yrs Y mos"
-            - .duration-calc span filled by duration-calculator.js
+            OVERALL DURATION for the organization
+            Shows total time at the organization across all roles
         -->
         <p class="duration" data-start="{{ exp.start_date }}" data-end="{{ exp.end_date }}">
             {% assign start_parts = exp.start_date | split: "-" %}
@@ -69,11 +67,45 @@ og_type: "profile"
              · <span class="duration-calc"></span>
         </p>
         
-        <!-- Role and description -->
-        <div class="role-info">
-            <p class="role"><strong>Role:</strong> {{ exp.role }}</p>
-            <p class="description">{{ exp.description }}</p>
-        </div>
+        <!-- 
+            HANDLE MULTIPLE ROLES vs SINGLE ROLE
+            If exp.roles exists, display each role separately (LinkedIn-style progression)
+            Otherwise, display single role with description
+        -->
+        {% if exp.roles %}
+            <!-- MULTIPLE ROLES - Display progression within organization -->
+            <div class="roles-progression">
+                {% for role in exp.roles %}
+                <div class="role-entry">
+                    <p class="role-title"><strong>{{ role.title }}</strong></p>
+                    <p class="role-duration" data-start="{{ role.start_date }}" data-end="{{ role.end_date }}">
+                        {% assign role_start_parts = role.start_date | split: "-" %}
+                        {% assign role_start_year = role_start_parts[0] %}
+                        {% assign role_start_month = role_start_parts[1] %}
+                        {% assign role_start_obj = role_start_year | append: "-" | append: role_start_month | append: "-01" | date: "%s" %}
+                        {{ role_start_obj | date: "%b %Y" }} - 
+                        {% if role.end_date == "present" %}
+                            Present
+                        {% else %}
+                            {% assign role_end_parts = role.end_date | split: "-" %}
+                            {% assign role_end_year = role_end_parts[0] %}
+                            {% assign role_end_month = role_end_parts[1] %}
+                            {% assign role_end_obj = role_end_year | append: "-" | append: role_end_month | append: "-01" | date: "%s" %}
+                            {{ role_end_obj | date: "%b %Y" }}
+                        {% endif %}
+                         · <span class="duration-calc"></span>
+                    </p>
+                    <p class="role-description">{{ role.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- SINGLE ROLE - Traditional display -->
+            <div class="role-info">
+                <p class="role"><strong>Role:</strong> {{ exp.role }}</p>
+                <p class="description">{{ exp.description }}</p>
+            </div>
+        {% endif %}
     </div>
     {% endfor %}
 </div>

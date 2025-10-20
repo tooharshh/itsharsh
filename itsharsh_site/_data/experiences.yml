@@ -10,17 +10,27 @@
 # 4. Scalability - easy to add/remove/reorder entries
 # 5. Version control friendly - cleaner diffs when content changes
 #
-# DATA STRUCTURE:
+# DATA STRUCTURE (ENHANCED FOR MULTIPLE ROLES):
 # - organization: Company/organization name
-#   start_date: Start date in YYYY-MM format
-#   end_date: End date in YYYY-MM format or "present" for current positions
-#   role: Job title or role
-#   description: Brief description of responsibilities/achievements
+#   start_date: Overall start date (earliest role)
+#   end_date: Overall end date (latest role or "present")
+#   roles: Array of positions within the organization
+#     - title: Role title
+#       start_date: Role start date
+#       end_date: Role end date or "present"
+#       description: Role-specific description
+#
+# SINGLE ROLE FORMAT (for organizations with one position):
+# - organization: Company name
+#   start_date: Start date
+#   end_date: End date or "present"
+#   role: Job title
+#   description: Description
 #
 # USAGE IN TEMPLATES:
 # {% for exp in site.data.experiences %}
-#   {{ exp.organization }}
-#   {{ exp.role }}
+#   {% if exp.roles %} (multiple roles)
+#   {% else %} (single role)
 # {% endfor %}
 
 # ============================================
@@ -28,10 +38,17 @@
 # ============================================
 
 - organization: "NextTechLab"
-  start_date: "2025-10"
+  start_date: "2025-04"
   end_date: "present"
-  role: "Member"
-  description: "Promoted to Member in the McCarthy Lab, advancing research in AI and ML."
+  roles:
+    - title: "Member"
+      start_date: "2025-09"
+      end_date: "present"
+      description: "Promoted to Member , strengthening my roots in AI and ML."
+    - title: "Associate - McCarthy Lab"
+      start_date: "2025-04"
+      end_date: "2025-09"
+      description: "Joined the McCarthy Lab"
 
 - organization: "Foresight-X"
   start_date: "2025-02"
@@ -42,12 +59,6 @@
 # ============================================
 # PAST POSITIONS
 # ============================================
-
-- organization: "NextTechLab"
-  start_date: "2025-04"
-  end_date: "2025-10"
-  role: "Associate"
-  description: "Part of the McCarthy Lab, strengthening my roots in AI and ML."
 
 - organization: "KRUU"
   start_date: "2023-01"
