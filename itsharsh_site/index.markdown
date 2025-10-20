@@ -9,7 +9,7 @@ permalink: /
 # - Include primary keywords naturally (AI/ML, earthquake warning)
 # - Make it compelling to encourage clicks
 # - Reflects the site's satirical, casual personality
-description: "AI/ML researcher. Foresight-X. NextTechLab. Disaster Management. Earthquake early warning systems. 
+description: "AI/ML researcher working on earthquake early warning systems at Foresight-X and advancing AI research at NextTechLab's McCarthy Lab."
 # OPEN GRAPH / SOCIAL MEDIA
 # These tags control how the page appears when shared on social platforms
 # og:type Person indicates this is a personal portfolio/profile

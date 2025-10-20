@@ -61,8 +61,8 @@ og_type: "article"
             - Year provides temporal context
         -->
         <p class="paper-meta">
-            <strong>{​{ paper.type }}</strong> · 
-            <a href="{{ paper.conference_url }}" target="_blank">{​{ paper.conference }}</a>
+            <strong>{{ paper.type }}</strong> · 
+            <a href="{{ paper.conference_url }}" target="_blank">{{ paper.conference }}</a>
             {% if paper.year %} · {{ paper.year }}{% endif %}
         </p>
         
