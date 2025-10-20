@@ -144,6 +144,15 @@ kramdown:
     block:
       line_numbers: false  # Cleaner code blocks without line numbers
 
+# ==============================================================================
+# INCLUDE FILES
+# ==============================================================================
+# By default, Jekyll excludes files and directories starting with . (dot)
+# We need to explicitly include .well-known for security.txt to be served
+# This is required for RFC 9116 compliance
+include:
+  - .well-known  # Security.txt and other well-known URIs
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
