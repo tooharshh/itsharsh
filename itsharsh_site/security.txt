@@ -1,0 +1,81 @@
+# SECURITY.TXT - Security Policy and Contact Information
+# Standard defined by RFC 9116 (https://www.rfc-editor.org/rfc/rfc9116.html)
+#
+# WHY THIS FILE EXISTS:
+# - Provides a standardized way for security researchers to report vulnerabilities
+# - Shows professionalism and commitment to security
+# - Helps prevent public disclosure of security issues before they're fixed
+# - Recommended by security best practices
+#
+# LOCATION:
+# This file should be served at both:
+# - /.well-known/security.txt (canonical location per RFC)
+# - /security.txt (legacy location for backwards compatibility)
+#
+# VALIDATION:
+# Validate this file at: https://securitytxt.org/
+
+# CONTACT INFORMATION
+# Primary method for security researchers to report vulnerabilities
+# Use email or create a dedicated security@ email address
+# TODO: Replace with your actual security contact email
+Contact: mailto:security@example.com
+
+# ALTERNATIVE: Link to a contact page with security reporting instructions
+# Contact: https://your-site.com/security-contact
+
+# EXPIRES
+# This file must be updated before this date
+# Set to 1 year from now (RFC recommends updating annually)
+# Format: ISO 8601 date-time
+# TODO: Update this date annually
+Expires: 2026-10-20T00:00:00.000Z
+
+# PREFERRED LANGUAGES
+# Languages you can communicate in for security reports
+# Use ISO 639-1 language codes
+Preferred-Languages: en
+
+# ACKNOWLEDGMENTS
+# Optional: Link to a page acknowledging security researchers
+# Acknowledgments: https://your-site.com/security-hall-of-fame
+
+# ENCRYPTION
+# Optional: PGP key for encrypted communication
+# Provide URL to your PGP public key
+# Encryption: https://keys.openpgp.org/vks/v1/by-fingerprint/YOUR_FINGERPRINT
+
+# POLICY
+# Optional: Link to your security policy
+# Describes what is in scope, expectations, etc.
+# Policy: https://your-site.com/security-policy
+
+# HIRING
+# Optional: Link to security-related job openings
+# Hiring: https://your-site.com/careers
+
+# ============================================
+# SECURITY BEST PRACTICES FOR THIS SITE
+# ============================================
+# This is a static Jekyll site with the following security measures:
+#
+# 1. Content Security Policy (CSP) to prevent XSS
+# 2. HTTPS-only with HSTS (when enabled)
+# 3. No user-generated content or dynamic backend
+# 4. No database or server-side processing
+# 5. Regular dependency updates via Dependabot
+# 6. Minimal external dependencies
+#
+# LOW RISK AREAS:
+# - Static HTML/CSS/JS only
+# - No authentication or user data storage
+# - No forms or data submission
+# - External blog links (Notion-hosted)
+#
+# POTENTIAL CONCERNS:
+# - Third-party dependencies (Google Fonts, Jekyll plugins)
+# - Client-side JavaScript (theme toggle, duration calculator)
+# - External links to Notion, GitHub, LinkedIn
+#
+# If you discover a security issue, please report it responsibly
+# via the contact information above.
