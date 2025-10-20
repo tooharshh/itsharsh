@@ -43,8 +43,42 @@
     
     # CONTENT SECURITY POLICY (CSP)
     # Strict policy to prevent XSS and data injection attacks
-    # Note: Adjust if adding external scripts (analytics, etc.)
-    # Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'"
+    # This is a defense-in-depth measure that significantly reduces attack surface
+    #
+    # POLICY BREAKDOWN:
+    # - default-src 'self': Only allow resources from same origin by default
+    # - script-src 'self' 'unsafe-inline': Allow inline scripts (needed for theme toggle in <head>)
+    #   Note: 'unsafe-inline' is needed for the FOUC prevention script
+    #   Future: Consider using nonce or hash-based CSP for better security
+    # - style-src 'self' 'unsafe-inline' https://fonts.googleapis.com: 
+    #   Allow inline styles and Google Fonts CSS
+    # - font-src 'self' https://fonts.gstatic.com: Allow fonts from Google and same origin
+    # - img-src 'self' data: https:: Allow images from same origin, data URIs, and HTTPS
+    # - connect-src 'self': Only allow AJAX/WebSocket to same origin
+    # - frame-ancestors 'none': Prevent embedding in iframes (reinforces X-Frame-Options)
+    # - base-uri 'self': Restrict <base> tag to same origin (prevents base tag hijacking)
+    # - form-action 'self': Only allow form submissions to same origin
+    # - upgrade-insecure-requests: Automatically upgrade HTTP requests to HTTPS
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    
+    # STRICT TRANSPORT SECURITY (HSTS)
+    # Forces browsers to only connect via HTTPS for the specified duration
+    # - max-age=31536000: Enforce HTTPS for 1 year (365 days)
+    # - includeSubDomains: Apply to all subdomains as well
+    # - preload: Eligible for browser HSTS preload lists (extra protection)
+    #
+    # IMPORTANT: Only enable this after confirming HTTPS works properly
+    # Once set, browsers will refuse HTTP connections for the duration
+    # Uncomment when ready for production with confirmed HTTPS setup
+    # Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    
+    # CROSS-ORIGIN POLICIES
+    # Additional security headers for modern browsers
+    # 
+    # Cross-Origin-Embedder-Policy: Prevents loading cross-origin resources without explicit permission
+    # - require-corp: Requires Cross-Origin-Resource-Policy header on cross-origin resources
+    # Cross-Origin-Opener-Policy = "same-origin"
+    # Cross-Origin-Resource-Policy = "same-origin"
 
 # ==============================================================================
 # PERFORMANCE HEADERS (Static Assets)
