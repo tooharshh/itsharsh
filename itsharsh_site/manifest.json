@@ -1,0 +1,22 @@
+{
+  "name": "itsharsh - AI/ML Researcher Portfolio",
+  "short_name": "itsharsh",
+  "description": "Personal portfolio of Harsh Dudhatra - AI/ML researcher working on earthquake early warning systems",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFAFA",
+  "theme_color": "#212427",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["education", "research", "portfolio"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}
