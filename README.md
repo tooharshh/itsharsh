@@ -2,6 +2,8 @@
 
 A modern, minimalist portfolio website built with Jekyll, showcasing research experience, projects, and papers in the field of Artificial Intelligence and Machine Learning.
 
+hosted at --> itsharshh.netlify.app
+
 ## 🌟 Features
 
 ### Core Functionality
