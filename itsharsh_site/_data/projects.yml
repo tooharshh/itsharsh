@@ -26,6 +26,10 @@
 # ACTIVE PROJECTS
 # ============================================
 
+- title: "MARF"
+  url: "https://github.com/tooharshh/Foresight-X/blob/main/MARF.ipynb"
+  description: "A Random Forest regression model for earthquake magnitude prediction with regularization."
+
 - title: "Sentiva"
   url: "https://github.com/tooharshh/sentiva"
   description: "A tool to interpret sentiment trends for daily news articles through VADER analysis."
