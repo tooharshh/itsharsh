@@ -26,6 +26,10 @@
 # ACTIVE PROJECTS
 # ============================================
 
+- title: "OOF"
+  url: "https://github.com/tooharshh/OOF"
+  description: "A fraud detection system using Machine Learning (Isolation Forest) deployed as a scalable REST API."
+
 - title: "MARF"
   url: "https://github.com/tooharshh/Foresight-X/blob/main/MARF.ipynb"
   description: "A Random Forest regression model for earthquake magnitude prediction with regularization."
