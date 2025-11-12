@@ -1,25 +1,3 @@
-# EXPERIENCE DATA
-# 
-# This YAML file stores all professional experience entries
-# Separating content from presentation improves maintainability
-#
-# WHY USE DATA FILES?
-# 1. Easy content updates - change data without touching HTML
-# 2. Consistent formatting - template ensures uniform display
-# 3. Reusability - same data can be used in multiple places
-# 4. Scalability - easy to add/remove/reorder entries
-# 5. Version control friendly - cleaner diffs when content changes
-#
-# DATA STRUCTURE (ENHANCED FOR MULTIPLE ROLES):
-# - organization: Company/organization name
-#   start_date: Overall start date (earliest role)
-#   end_date: Overall end date (latest role or "present")
-#   roles: Array of positions within the organization
-#     - title: Role title
-#       start_date: Role start date
-#       end_date: Role end date or "present"
-#       description: Role-specific description
-#
 # SINGLE ROLE FORMAT (for organizations with one position):
 # - organization: Company name
 #   start_date: Start date
@@ -32,11 +10,6 @@
 #   {% if exp.roles %} (multiple roles)
 #   {% else %} (single role)
 # {% endfor %}
-
-# ============================================
-# CURRENT POSITIONS (end_date: present)
-# ============================================
-
 - organization: "NextTechLab"
   start_date: "2025-04"
   end_date: "present"
@@ -55,10 +28,6 @@
   end_date: "present"
   role: "Co-Founder"
   description: "Implementing AI/ML, Digital Twin technologies to predict natural calamities before they occur."
-
-# ============================================
-# PAST POSITIONS
-# ============================================
 
 - organization: "KRUU"
   start_date: "2023-01"

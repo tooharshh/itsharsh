@@ -1,85 +1,26 @@
 ---
 layout: default
 title: "Blogs - itsharsh"
-# Clean URL structure without /itsharsh/ prefix
-# This creates a simpler, more professional URL: yoursite.com/blogs/
 permalink: /blogs/
-# SEO META DESCRIPTION
-# Updated to reflect Notion-hosted blog posts
-# Keywords: AI, ML, tech insights, thoughts
-# Maintains casual, approachable tone consistent with site personality
 description: "Thoughts and insights on AI/ML, technology, and learning to make algorithms learn. Blog posts hosted on Notion."
-# OPEN GRAPH TYPE
-# "website" type appropriate for blog landing/index pages
 og_type: "website"
 ---
 
 <h1>blogs</h1>
 
-<!-- 
-    BLOG LINKS - NOTION HOSTED
-    
-    This page displays links to blog posts hosted on Notion
-    Uses data-driven approach with _data/blogs.yml for easy content management
-    
-    WHY EXTERNAL HOSTING (NOTION)?
-    - Notion provides rich editing experience with blocks and embeds
-    - Easy to write and format without dealing with markdown/HTML
-    - Built-in collaboration features for drafts and reviews
-    - No need to rebuild/redeploy Jekyll site for new posts
-    - Notion's sharing features handle comments and engagement
-    
-    DATA-DRIVEN APPROACH:
-    - All blog metadata stored in _data/blogs.yml
-    - Add new posts by editing YAML file (no HTML changes)
-    - Consistent card formatting across all posts
-    - Can sort by date, filter by tags, etc.
-    
-    CONDITIONAL DISPLAY:
-    - If blogs exist in data file: Display them in cards
-    - If no blogs yet: Show "coming soon" message
-    - This allows the page to work before and after blogs are added
--->
-
 {% if site.data.blogs.size > 0 %}
-    <!-- 
-        BLOG LINK CARDS
-        Each blog gets a card with:
-        - Title (clickable link to Notion page)
-        - Publication date
-        - Description/excerpt
-        - Tags (if provided)
-        - External link indicator (arrow)
-    -->
     <div class="blog-list">
         {% for blog in site.data.blogs %}
         <article class="blog-preview">
-            <!-- 
-                BLOG TITLE
-                Links to external Notion page
-                Opens in new tab to preserve user's place on portfolio site
-                target="_blank" with rel="noopener noreferrer" for security
-            -->
             <h2 class="preview-title">
                 <a href="{{ blog.url }}" target="_blank" rel="noopener noreferrer">
                     {{ blog.title }}
-                    <!-- External link indicator - shows it opens in new tab -->
                     <span style="font-size: 0.8em; opacity: 0.6;">↗</span>
                 </a>
             </h2>
             
-            <!-- 
-                BLOG METADATA
-                Shows publication date and optional tags
-                Date format: "January 15, 2025" (human-readable)
-            -->
             <div class="preview-meta">
                 {% if blog.date %}
-                <!-- 
-                    Convert YYYY-MM-DD date string to readable format
-                    Jekyll's date filter needs a proper date object
-                    Append "-01" to create valid date for day of month
-                -->
                 {% assign date_parts = blog.date | split: "-" %}
                 {% assign date_string = blog.date | append: "-01" %}
                 <time datetime="{{ blog.date }}">
@@ -87,11 +28,6 @@ og_type: "website"
                 </time>
                 {% endif %}
                 
-                <!-- 
-                    TAGS DISPLAY
-                    Shows topic tags for content categorization
-                    Inline display for compact presentation
-                -->
                 {% if blog.tags %}
                 <span class="separator">·</span>
                 <span class="tags">
@@ -102,23 +38,12 @@ og_type: "website"
                 {% endif %}
             </div>
             
-            <!-- 
-                BLOG DESCRIPTION
-                Brief summary of the post content
-                Helps readers decide if they want to click through
-            -->
             {% if blog.description %}
             <p class="preview-excerpt">
                 {{ blog.description }}
             </p>
             {% endif %}
             
-            <!-- 
-                READ ON NOTION LINK
-                Clear call-to-action to visit Notion page
-                Arrow (→) provides visual direction cue
-                Opens in new tab to avoid navigation away from portfolio
-            -->
             <a href="{{ blog.url }}" target="_blank" rel="noopener noreferrer" class="read-more">
                 read on notion →
             </a>
@@ -127,11 +52,5 @@ og_type: "website"
     </div>
     
 {% else %}
-    <!-- 
-        NO BLOGS YET MESSAGE
-        Displays when _data/blogs.yml is empty
-        Maintains casual, personality-driven tone
-        Explains that blogs will be hosted on Notion
-    -->
     <p class="coming-soon">blog posts coming soon. writing stuff on notion and will link them here.</p>
 {% endif %}

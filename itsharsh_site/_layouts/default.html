@@ -4,90 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
-    
-    <!-- 
-        FAVICON LINKS
-        Multiple formats for cross-browser compatibility
-        ?v=1 query parameter helps with cache busting when favicon changes
-    -->
     <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=1" type="image/x-icon">
     <link rel="shortcut icon" href="{{ '/favicon.ico' | relative_url }}?v=1" type="image/x-icon">
     <link rel="apple-touch-icon" href="{{ '/favicon.ico' | relative_url }}">
-    
-    <!-- 
-        PERFORMANCE OPTIMIZATIONS - DNS Prefetch & Preconnect
-        These resource hints tell the browser to establish early connections
-        Reduces latency for external resources (fonts from Google)
-        
-        dns-prefetch: Resolves DNS early (low-cost hint for older browsers)
-        preconnect: Full connection setup including TLS handshake (higher cost but faster)
-        
-        Why both? Fallback support - preconnect for modern browsers, dns-prefetch for older
-        Performance gain: ~100-300ms saved on font loading
-    -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- 
-        STYLESHEET LOADING
-        Main site styles - blocking load for FOUC prevention
-        Loaded before font to ensure proper rendering
-    -->
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
-    
-    <!-- 
-        FONT LOADING - Google Fonts
-        Space Mono (monospace) with all weights and styles
-        display=swap ensures text remains visible during font load (prevents FOIT)
-        
-        Performance considerations:
-        - Only loads necessary font weights (400, 700) and styles (normal, italic)
-        - Uses font-display: swap in CSS for fallback rendering
-        - Combined with preconnect for faster load
-    -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    
-    <!-- 
-        PROGRESSIVE WEB APP MANIFEST
-        Enables PWA features like install to home screen
-        Provides metadata for app-like experience on mobile devices
-        
-        BENEFITS:
-        - Add to home screen functionality
-        - Splash screen customization
-        - Standalone display mode (no browser UI)
-        - Theme color for status bar
-        - Better mobile experience
-    -->
     <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
-    
-    <!-- 
-        THEME COLOR META TAG
-        Controls browser UI color on mobile devices
-        Matches dark theme for consistent experience
-        iOS Safari and Android Chrome support this
-    -->
     <meta name="theme-color" content="#212427">
-    
-    <!-- 
-        ANTI-FOUC (Flash of Unstyled Content) SCRIPT
-        This inline script MUST remain in <head> to prevent theme flashing
-        
-        Why inline instead of external?
-        - Must execute BEFORE page renders to prevent white flash in dark mode
-        - External scripts load asynchronously, causing visible delay
-        - This is the ONLY inline script justified for performance reasons
-        
-        What it does:
-        - Checks localStorage for saved theme preference
-        - Applies dark-mode class to <html> immediately if needed
-        - Runs before any CSS or content loads
-        
-        Note: Full theme toggle logic is in external theme-toggle.js
-        This is just the minimal code needed to prevent FOUC
-    -->
     <script>
     (function() {
         try {
@@ -95,10 +22,7 @@
             if (savedTheme === 'dark') {
                 document.documentElement.classList.add('dark-mode');
             }
-        } catch (e) {
-            // If localStorage fails (private browsing), default to light mode
-            // No console.warn here to keep this script minimal and fast
-        }
+        } catch (e) {}
     })();
     </script>
     {% seo %}
@@ -108,13 +32,6 @@
         <div class="container">
             <header class="site-header">
                 <nav class="navigation">
-                <!-- 
-                    NAVIGATION LINKS
-                    - Using clean URLs without /itsharsh/ prefix for better SEO and cleaner structure
-                    - relative_url filter ensures proper baseurl handling across environments
-                    - Active state detection uses page.url to highlight current page
-                    - Trailing slashes in comparison are important for Jekyll's URL structure
-                -->
                 <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">home</a>
                 <a href="{{ '/experience/' | relative_url }}" class="nav-link {% if page.url == '/experience/' %}active{% endif %}">experience</a>
                 <a href="{{ '/projects/' | relative_url }}" class="nav-link {% if page.url == '/projects/' %}active{% endif %}">projects</a>
@@ -141,58 +58,7 @@
             {{ content }}
         </main>
     </div>
-
-    <!-- 
-        THEME TOGGLE SCRIPT
-        External JavaScript for theme switching functionality
-        
-        PERFORMANCE OPTIMIZATION:
-        - Loaded at end of body (doesn't block page rendering)
-        - Deferred execution after DOM is ready
-        - Async attribute allows browser to continue parsing while downloading
-        - Small file size (~4KB) loads quickly
-        
-        SECURITY:
-        - No inline event handlers (CSP-friendly)
-        - Self-contained IIFE prevents global scope pollution
-        - Comprehensive error handling prevents script failures
-        
-        FUTURE ENHANCEMENT:
-        - Add integrity hash (SRI) when using CDN
-        - Consider bundling with other scripts for production
-        - Minify in production builds
-    -->
     <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}" async></script>
-    
-    <!-- 
-        PERFORMANCE MONITORING SCRIPT
-        Tracks Core Web Vitals and resource loading times for optimization insights
-        Only logs to console - no data transmission, fully privacy-preserving
-        
-        WHAT IT MONITORS:
-        - LCP (Largest Contentful Paint): Loading performance
-        - FID (First Input Delay): Interactivity responsiveness  
-        - CLS (Cumulative Layout Shift): Visual stability
-        - Resource timing: Slow-loading assets identification
-        - Navigation timing: Page load breakdown
-        - Long tasks: JavaScript blocking main thread
-        
-        WHY MONITOR?
-        - Validates optimization efforts (caching, async loading, etc.)
-        - Identifies performance regressions early
-        - Provides real user monitoring (RUM) data
-        - Helps maintain fast, responsive user experience
-        
-        USAGE:
-        - Open DevTools Console to see metrics
-        - Check for warnings about long tasks or slow resources
-        - Compare metrics before/after optimizations
-        
-        PRODUCTION CONSIDERATION:
-        - Consider removing or gating behind debug flag for production
-        - Or integrate with analytics service for aggregate RUM data
-        - Current implementation: development/testing only
-    -->
     <script src="{{ '/assets/js/performance.js' | relative_url }}" async></script>
 </body>
 </html>

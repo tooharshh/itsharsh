@@ -1,78 +1,24 @@
 ---
 layout: default
 title: "Papers - itsharsh"
-# Clean URL structure without /itsharsh/ prefix
-# This creates a simpler, more professional URL: yoursite.com/papers/
 permalink: /papers/
-# SEO META DESCRIPTION
-# Academic-focused description targeting scholarly search queries
-# Keywords: AI, earthquake warning, research papers, machine learning
-# Mentions specific conference (GLS 2025) for academic credibility
 description: "Research papers on AI for earthquake early warning systems, machine learning applications in disaster prediction, and related publications. Presented at GLS Conference 2025."
-# OPEN GRAPH TYPE
-# "article" type signals academic/scholarly content
-# Better indexing by academic search engines like Google Scholar
 og_type: "article"
 ---
 
 <h1>papers</h1>
 
-<!-- 
-    PAPERS SECTION - DATA-DRIVEN CONTENT WITH CARD LAYOUT
-    
-    This section dynamically generates paper cards from _data/papers.yml
-    Changed from list-based to card-based layout for visual consistency with projects
-    
-    BENEFITS OF DATA FILES:
-    - Add new papers by editing papers.yml (no HTML changes)
-    - Consistent card formatting matching projects section
-    - Easy to add metadata (year, status, citations, etc.)
-    - Can filter by type, year, or status in future
-    - Academic CV can be generated from same data
-    
-    DESIGN CONSISTENCY:
-    - Uses same card structure as projects
-    - Dotted borders and hover effects (defined in main.scss)
-    - Visual hierarchy through typography and color
-    - Professional academic presentation
-    
-    CARD STRUCTURE:
-    - Paper title as main heading
-    - Paper type and conference as metadata
-    - Link to read the full paper
-    - Optional status badge (published, under-review, etc.)
--->
 <div class="papers-grid">
     {% for paper in site.data.papers %}
     <div class="paper-card">
-        <!-- 
-            Paper title
-            - Main heading for the paper
-            - Uses h3 for consistency with projects section
-            - Clear hierarchy in page structure
-        -->
         <h3>{{ paper.title }}</h3>
         
-        <!-- 
-            Paper metadata (type and conference)
-            - Shows publication type (Review Paper, Research Paper, etc.)
-            - Links to conference/journal website
-            - Secondary text color for visual hierarchy
-            - Year provides temporal context
-        -->
         <p class="paper-meta">
             <strong>{{ paper.type }}</strong> · 
             <a href="{{ paper.conference_url }}" target="_blank">{{ paper.conference }}</a>
             {% if paper.year %} · {{ paper.year }}{% endif %}
         </p>
         
-        <!-- 
-            Link to full paper
-            - Prominent "Read Paper" link with arrow
-            - Opens in new tab (preserves user's place)
-            - Underline class for emphasis
-            - Arrow (→) provides visual direction cue
-        -->
         <p class="paper-link">
             <a href="{{ paper.paper_url }}" target="_blank" class="underline">Read Paper →</a>
         </p>

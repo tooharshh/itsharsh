@@ -1,23 +1,3 @@
-# BLOG LINKS DATA
-#
-# This YAML file stores links to blog posts hosted on Notion
-# Separating content links from presentation improves maintainability
-#
-# WHY USE DATA FILES FOR EXTERNAL LINKS?
-# 1. Easy to add new blog posts - just append to this file
-# 2. Consistent card formatting across all blog links
-# 3. Can add metadata like date, tags, featured status
-# 4. Content is portable and can be reused elsewhere
-# 5. Keeps the blogs.html template clean and focused on presentation
-#
-# DATA STRUCTURE:
-# - title: Blog post title
-#   url: Link to Notion page (or other external host)
-#   date: Publication date (YYYY-MM-DD format for sorting)
-#   description: Brief summary of the post content
-#   tags: (optional) Array of topic tags for categorization
-#   featured: (optional) true/false - highlight important posts
-#
 # USAGE IN TEMPLATES:
 # {% for blog in site.data.blogs %}
 #   <h3><a href="{{ blog.url }}">{{ blog.title }}</a></h3>

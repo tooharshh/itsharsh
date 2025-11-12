@@ -1,34 +1,3 @@
-# PAPERS DATA
-#
-# This YAML file stores all research papers and publications
-# Separating content from presentation improves maintainability
-#
-# WHY USE DATA FILES?
-# 1. Academic CV can be generated from same data
-# 2. Easy to add new publications
-# 3. Can filter by type, year, or status
-# 4. Consistent citation formatting
-# 5. Machine-readable format for future integrations
-#
-# DATA STRUCTURE:
-# - title: Paper title
-#   type: Type of publication (review, research, conference, journal, etc.)
-#   conference: Conference/journal name
-#   conference_url: Link to conference/journal
-#   paper_url: Link to paper (PDF, Google Drive, publisher site)
-#   year: Publication year
-#   status: (optional) published, under-review, in-progress
-#
-# USAGE IN TEMPLATES:
-# {% for paper in site.data.papers %}
-#   <h3>{{ paper.title }}</h3>
-#   <p>{{ paper.type }} · {{ paper.conference }}</p>
-# {% endfor %}
-
-# ============================================
-# PUBLISHED PAPERS
-# ============================================
-
 - title: "A study on AI for Earthquake Early Warning Systems"
   type: "Review Paper"
   conference: "GLS Conference 2025"
@@ -36,16 +5,3 @@
   paper_url: "https://drive.google.com/drive/folders/16uh8i4t-aFKLBAJ5CyO8Ya5JCBEZbvSZ?usp=sharing"
   year: 2025
   status: "published"
-
-# ============================================
-# TO ADD MORE PAPERS
-# ============================================
-# Simply copy the structure above and fill in the details:
-#
-# - title: "Your Paper Title"
-#   type: "Research Paper"
-#   conference: "Conference Name"
-#   conference_url: "https://conference-link"
-#   paper_url: "https://link-to-paper"
-#   year: 2025
-#   status: "published"

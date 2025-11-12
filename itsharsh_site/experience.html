@@ -1,54 +1,18 @@
 ---
 layout: default
 title: "Experience - itsharsh"
-# Clean URL structure without /itsharsh/ prefix
-# This creates a simpler, more professional URL: yoursite.com/experience/
 permalink: /experience/
-# SEO META DESCRIPTION
-# Optimized for search queries like "harsh dudhatra experience", "AI researcher background"
-# Highlights key organizations (NextTechLab, foresight-x) for brand association
-# Character count: ~150 (optimal for search results display)
 description: "Professional experience working with NextTechLab's McCarthy Lab on AI/ML and co-founding foresight-x to predict natural calamities using digital twin technologies."
-# OPEN GRAPH TYPE
-# "profile" type appropriate for experience/resume pages
-# Generates proper schema.org markup for better search engine understanding
 og_type: "profile"
 ---
 
 <h1>experience</h1>
 
-<!-- 
-    EXPERIENCE SECTION - DATA-DRIVEN CONTENT
-    
-    This section dynamically generates experience cards from _data/experiences.yml
-    
-    BENEFITS OF DATA FILES:
-    - Easy content updates: Just edit experiences.yml, no HTML changes needed
-    - Consistent formatting: Template ensures all entries look the same
-    - Maintainability: Content separated from presentation logic
-    - Scalability: Adding new experience is just adding YAML entries
-    
-    LOOP STRUCTURE:
-    - Iterates through site.data.experiences array
-    - Each iteration creates one experience card
-    - Data attributes (data-start, data-end) enable duration calculator
-    - Duration calculator JavaScript reads these and displays time spans
-    
-    DATE FORMATTING:
-    - Uses Jekyll's date filter to convert YYYY-MM to human-readable format
-    - Example: "2025-04" becomes "Apr 2025"
-    - Format string "%b %Y" = abbreviated month name + 4-digit year
--->
 <div class="experience-section">
     {% for exp in site.data.experiences %}
     <div class="experience-item">
-        <!-- Organization name as heading -->
         <h2>{{ exp.organization }}</h2>
         
-        <!-- 
-            OVERALL DURATION for the organization
-            Shows total time at the organization across all roles
-        -->
         <p class="duration" data-start="{{ exp.start_date }}" data-end="{{ exp.end_date }}">
             {% assign start_parts = exp.start_date | split: "-" %}
             {% assign start_year = start_parts[0] %}
@@ -67,13 +31,7 @@ og_type: "profile"
              · <span class="duration-calc"></span>
         </p>
         
-        <!-- 
-            HANDLE MULTIPLE ROLES vs SINGLE ROLE
-            If exp.roles exists, display each role separately (LinkedIn-style progression)
-            Otherwise, display single role with description
-        -->
         {% if exp.roles %}
-            <!-- MULTIPLE ROLES - Display progression within organization -->
             <div class="roles-progression">
                 {% for role in exp.roles %}
                 <div class="role-entry">
@@ -100,7 +58,6 @@ og_type: "profile"
                 {% endfor %}
             </div>
         {% else %}
-            <!-- SINGLE ROLE - Traditional display -->
             <div class="role-info">
                 <p class="role"><strong>Role:</strong> {{ exp.role }}</p>
                 <p class="description">{{ exp.description }}</p>
@@ -110,17 +67,4 @@ og_type: "profile"
     {% endfor %}
 </div>
 
-<!-- 
-    DURATION CALCULATOR SCRIPT
-    External JavaScript for automatic experience duration calculation
-    
-    What it does:
-    - Calculates time spans between start and end dates
-    - Formats output in LinkedIn-style (e.g., "1 yr 3 mos")
-    - Handles ongoing positions with "present" as end date
-    - Updates daily for current positions
-    - Includes comprehensive error handling and validation
-    
-    See assets/js/duration-calculator.js for full implementation
--->
 <script src="{{ '/assets/js/duration-calculator.js' | relative_url }}"></script>
