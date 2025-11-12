@@ -26,12 +26,16 @@
 # ACTIVE PROJECTS
 # ============================================
 
+- title: "Shakelytics"
+  url: "https://github.com/tooharshh/Foresight-X/tree/main/Shakelytics"
+  description: "Web-based visualization platform for exploring Indian seismic activity using Kepler.gl and Flask"
+
 - title: "OOF"
   url: "https://github.com/tooharshh/OOF"
   description: "A fraud detection system trained using Isolation Forests deployed as a scalable REST API."
 
 - title: "MARF"
-  url: "https://github.com/tooharshh/Foresight-X/blob/main/MARF.ipynb"
+  url: "https://github.com/tooharshh/Foresight-X/tree/main/MARF"
   description: "A Random Forest regression model for earthquake magnitude prediction with regularization."
 
 - title: "Sentiva"
