@@ -34,6 +34,8 @@ body {
     min-height: 100vh;
     padding: 1.5rem;
     margin: 1rem;
+    border: 3px dotted var(--border-color);
+    border-radius: 8px;
     transition: border-color 0.3s ease;
 }
 
@@ -487,6 +489,7 @@ html.dark-mode body .paper-card:hover {
     .outer-border {
         margin: 0.5rem;
         padding: 1rem;
+        border-width: 2px;
     }
 
     .intro {
@@ -683,6 +686,7 @@ body {
     margin-bottom: 2rem;
     padding: 1.5rem 0 1rem 0;
     border-bottom: 2px dotted var(--border-color);
+    flex-wrap: wrap;
 }
 
 .navigation {
@@ -840,208 +844,50 @@ body {
     }
 }
 
-/* 
- * SITE FOOTER
- * Footer with social media icon links
- * - Centered layout with dotted border top
- * - Icon-based links for GitHub and LinkedIn
- * - Hover effects with color change, background, and lift animation
- */
-.site-footer {
-    margin-top: 4rem;
-    padding: 2rem 0;
-    border-top: 2px dotted var(--border-color);
-    text-align: center;
-}
-
-.social-icons {
+.social-links {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.social-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    color: var(--text-color);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border-radius: 6px;
-    padding: 6px;
-
-    svg {
-        width: 100%;
-        height: 100%;
-        fill: currentColor;
-    }
-
-    &:hover {
-        color: var(--text-secondary);
-        background-color: var(--border-color);
-        transform: translateY(-2px);
-    }
-
-    &:focus {
-        outline: 2px solid var(--text-color);
-        outline-offset: 2px;
-        border-radius: 2px;
-    }
-
-    &:focus:not(:focus-visible) {
-        outline: none;
-    }
-}
-
-/* 
- * VERTICAL SIDEBAR NAVIGATION
- * Fixed left sidebar for desktop navigation
- * Hidden on mobile (≤1024px), visible on desktop (>1024px)
- */
-.sidebar {
-    display: none;
-    /* Hidden on mobile by default */
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 200px;
-    height: 100vh;
-    background-color: var(--bg-color);
-    border-right: 3px dotted var(--border-color);
-    padding: 2rem 1.5rem;
-    z-index: 100;
-    overflow-y: auto;
-    flex-direction: column;
-    justify-content: space-between;
-
-    /* Show on desktop */
-    @media (min-width: 1025px) {
-        display: flex;
-    }
-}
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.sidebar-link {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 1rem;
-    transition: all 0.2s ease;
-    padding: 0.5rem 0;
-    position: relative;
-
-    &:hover {
-        color: var(--text-secondary);
-        transform: translateX(4px);
-    }
-
-    &.active {
-        font-weight: 600;
-
-        &::before {
-            content: '→';
-            position: absolute;
-            left: -1rem;
-        }
-    }
-
-    &:focus {
-        outline: 2px solid var(--text-color);
-        outline-offset: 2px;
-        border-radius: 2px;
-    }
-
-    &:focus:not(:focus-visible) {
-        outline: none;
-    }
-}
-
-.sidebar-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-    margin-top: 2rem;
-}
-
-.sidebar-social {
-    display: flex;
-    flex-direction: column;
     gap: 1rem;
-    align-items: center;
+    flex-wrap: wrap;
 }
 
-/* Theme toggle in sidebar - reset positioning */
-.sidebar .theme-toggle {
-    position: relative;
-    bottom: auto;
-    right: auto;
-}
-
-/* Main wrapper - add left margin on desktop for sidebar */
-.main-wrapper {
-    margin-left: 0;
-    /* Default for mobile */
-
-    @media (min-width: 1025px) {
-        margin-left: 200px;
-        /* Sidebar width */
-    }
-}
-
-/* Visibility helper classes */
-.mobile-only {
-    display: block;
-
-    @media (min-width: 1025px) {
-        display: none !important;
-    }
-}
-
-.desktop-only {
-    display: none;
-
-    @media (min-width: 1025px) {
-        display: block;
-    }
-}
-
-/* Mobile theme toggle - floating button */
-.mobile-theme-toggle {
-    display: flex !important;
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 999;
-    width: 48px;
-    height: 48px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+/* 
+ * SOCIAL LINKS
+ * GitHub and LinkedIn profile links
+ * - Subtle secondary color by default for visual hierarchy
+ * - Transitions to primary color on hover for feedback
+ * - Accessible focus states for keyboard navigation
+ * - Slightly smaller font size (14px) to distinguish from main navigation
+ */
+.social-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
 
     &:hover {
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        color: var(--text-color);
     }
 
-    @media (min-width: 1025px) {
-        display: none !important;
-        /* Hidden on desktop */
+    /* 
+     * KEYBOARD FOCUS STYLES
+     * Clear focus indicator for social media links
+     * - Uses secondary color for visual distinction from main nav
+     * - 2px offset creates space between text and outline
+     * - Border-radius softens the focus rectangle
+     */
+    &:focus {
+        outline: 2px solid var(--text-secondary);
+        outline-offset: 2px;
+        border-radius: 2px;
     }
-}
 
-/* Dark mode shadow adjustment for mobile theme toggle */
-body.dark-mode .mobile-theme-toggle,
-html.dark-mode body .mobile-theme-toggle {
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
-
-    &:hover {
-        box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+    /* 
+     * FOCUS-VISIBLE ENHANCEMENT
+     * Hide focus outline when clicking with mouse
+     * Only show when navigating with keyboard (Tab key)
+     */
+    &:focus:not(:focus-visible) {
+        outline: none;
     }
 }
 
@@ -1842,7 +1688,17 @@ html.dark-mode body .mobile-menu {
     }
 }
 
+/* Mobile social links */
+.mobile-social {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
+    .social-link {
+        font-size: 1rem;
+        padding: 0.5rem 0;
+    }
+}
 
 /* Desktop navigation and social - hide on mobile/tablet */
 .desktop-nav,
@@ -1873,86 +1729,37 @@ html.dark-mode body .mobile-menu {
         display: block;
     }
 
-    /* Adjust header layout for mobile - simplified since menu is outside header */
+    /* Adjust header layout for mobile */
     .site-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 0;
-        border-bottom: 2px dotted var(--border-color);
-        min-height: 48px;
-        /* Ensure consistent height */
+        flex-wrap: nowrap;
     }
 
-    /* Home link stays on left - ensure vertical centering */
+    /* Home link stays on left */
     .home-link {
         order: 1;
-        display: inline-flex;
-        align-items: center;
-        line-height: 1;
-        /* Remove extra line height */
     }
 
-    /* Header actions (hamburger only) on right */
+    /* Header actions (theme + hamburger) on right */
     .header-actions {
         order: 2;
         display: flex;
-        align-items: center;
-        /* Vertically center hamburger */
+        flex-direction: row-reverse;
+        /* Swap order: hamburger on right, theme on left */
         gap: 0.5rem;
+        width: auto;
         margin-left: auto;
         /* Push to the right */
     }
 
-    /* Hide theme toggle from header on mobile - will be repositioned */
-    .header-actions .theme-toggle {
-        display: none !important;
-    }
-
-    /* Hamburger button - position fixed in lower right of menu when active */
+    /* Make hamburger button position fixed when visible */
     .hamburger-toggle {
-        position: relative;
-
-        &.active {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1002;
-            /* Above menu content */
-        }
-    }
-}
-
-/* Floating theme toggle button for mobile/tablet - appears at bottom-right */
-@media (max-width: 1024px) {
-
-    /* Create floating theme toggle */
-    body .theme-toggle,
-    html body .theme-toggle {
-        display: flex !important;
-        /* Override the hide from header */
         position: fixed;
-        bottom: 2rem;
+        top: 2.5rem;
+        /* Adjust based on your header height */
         right: 2rem;
-        z-index: 999;
-        width: 48px;
-        /* Larger for better touch target */
-        height: 48px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-        &:hover {
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-        }
-    }
-
-    /* Dark mode shadow adjustment for floating button */
-    body.dark-mode .theme-toggle,
-    html.dark-mode body .theme-toggle {
-        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
-
-        &:hover {
-            box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
-        }
     }
 }
 
@@ -1964,24 +1771,6 @@ html.dark-mode body .mobile-menu {
 
     .mobile-nav .nav-link {
         font-size: 1rem;
-    }
-
-    /* Footer adjustments for mobile */
-    .site-footer {
-        margin-top: 3rem;
-        padding: 1.5rem 0;
-        margin-bottom: 5rem;
-        /* Extra space for floating theme toggle */
-    }
-
-    .social-icons {
-        gap: 2rem;
-        /* Larger gap for better touch targets */
-    }
-
-    .social-icon {
-        width: 36px;
-        height: 36px;
     }
 }
 
@@ -2005,14 +1794,5 @@ html.dark-mode body .mobile-menu {
     .hamburger-toggle {
         top: 2rem;
         right: 1.5rem;
-    }
-
-    /* Adjust floating theme toggle for smaller screens */
-    body .theme-toggle,
-    html body .theme-toggle {
-        bottom: 1.5rem;
-        right: 1.5rem;
-        width: 44px;
-        height: 44px;
     }
 }
