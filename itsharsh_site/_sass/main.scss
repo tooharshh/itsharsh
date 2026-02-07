@@ -34,8 +34,6 @@ body {
     min-height: 100vh;
     padding: 1.5rem;
     margin: 1rem;
-    border: 3px dotted var(--border-color);
-    border-radius: 8px;
     transition: border-color 0.3s ease;
 }
 
@@ -489,7 +487,6 @@ html.dark-mode body .paper-card:hover {
     .outer-border {
         margin: 0.5rem;
         padding: 1rem;
-        border-width: 2px;
     }
 
     .intro {
@@ -686,7 +683,6 @@ body {
     margin-bottom: 2rem;
     padding: 1.5rem 0 1rem 0;
     border-bottom: 2px dotted var(--border-color);
-    flex-wrap: wrap;
 }
 
 .navigation {
@@ -844,50 +840,208 @@ body {
     }
 }
 
-.social-links {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+/* 
+ * SITE FOOTER
+ * Footer with social media icon links
+ * - Centered layout with dotted border top
+ * - Icon-based links for GitHub and LinkedIn
+ * - Hover effects with color change, background, and lift animation
+ */
+.site-footer {
+    margin-top: 4rem;
+    padding: 2rem 0;
+    border-top: 2px dotted var(--border-color);
+    text-align: center;
 }
 
-/* 
- * SOCIAL LINKS
- * GitHub and LinkedIn profile links
- * - Subtle secondary color by default for visual hierarchy
- * - Transitions to primary color on hover for feedback
- * - Accessible focus states for keyboard navigation
- * - Slightly smaller font size (14px) to distinguish from main navigation
- */
-.social-link {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.2s ease;
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
 
-    &:hover {
-        color: var(--text-color);
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    padding: 6px;
+
+    svg {
+        width: 100%;
+        height: 100%;
+        fill: currentColor;
     }
 
-    /* 
-     * KEYBOARD FOCUS STYLES
-     * Clear focus indicator for social media links
-     * - Uses secondary color for visual distinction from main nav
-     * - 2px offset creates space between text and outline
-     * - Border-radius softens the focus rectangle
-     */
+    &:hover {
+        color: var(--text-secondary);
+        background-color: var(--border-color);
+        transform: translateY(-2px);
+    }
+
     &:focus {
-        outline: 2px solid var(--text-secondary);
+        outline: 2px solid var(--text-color);
         outline-offset: 2px;
         border-radius: 2px;
     }
 
-    /* 
-     * FOCUS-VISIBLE ENHANCEMENT
-     * Hide focus outline when clicking with mouse
-     * Only show when navigating with keyboard (Tab key)
-     */
     &:focus:not(:focus-visible) {
         outline: none;
+    }
+}
+
+/* 
+ * VERTICAL SIDEBAR NAVIGATION
+ * Fixed left sidebar for desktop navigation
+ * Hidden on mobile (≤1024px), visible on desktop (>1024px)
+ */
+.sidebar {
+    display: none;
+    /* Hidden on mobile by default */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 100vh;
+    background-color: var(--bg-color);
+    border-right: 3px dotted var(--border-color);
+    padding: 2rem 1.5rem;
+    z-index: 100;
+    overflow-y: auto;
+    flex-direction: column;
+    justify-content: space-between;
+
+    /* Show on desktop */
+    @media (min-width: 1025px) {
+        display: flex;
+    }
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sidebar-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    padding: 0.5rem 0;
+    position: relative;
+
+    &:hover {
+        color: var(--text-secondary);
+        transform: translateX(4px);
+    }
+
+    &.active {
+        font-weight: 600;
+
+        &::before {
+            content: '→';
+            position: absolute;
+            left: -1rem;
+        }
+    }
+
+    &:focus {
+        outline: 2px solid var(--text-color);
+        outline-offset: 2px;
+        border-radius: 2px;
+    }
+
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
+}
+
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.sidebar-social {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Theme toggle in sidebar - reset positioning */
+.sidebar .theme-toggle {
+    position: relative;
+    bottom: auto;
+    right: auto;
+}
+
+/* Main wrapper - add left margin on desktop for sidebar */
+.main-wrapper {
+    margin-left: 0;
+    /* Default for mobile */
+
+    @media (min-width: 1025px) {
+        margin-left: 200px;
+        /* Sidebar width */
+    }
+}
+
+/* Visibility helper classes */
+.mobile-only {
+    display: block;
+
+    @media (min-width: 1025px) {
+        display: none !important;
+    }
+}
+
+.desktop-only {
+    display: none;
+
+    @media (min-width: 1025px) {
+        display: block;
+    }
+}
+
+/* Mobile theme toggle - floating button */
+.mobile-theme-toggle {
+    display: flex !important;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    width: 48px;
+    height: 48px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (min-width: 1025px) {
+        display: none !important;
+        /* Hidden on desktop */
+    }
+}
+
+/* Dark mode shadow adjustment for mobile theme toggle */
+body.dark-mode .mobile-theme-toggle,
+html.dark-mode body .mobile-theme-toggle {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+
+    &:hover {
+        box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
     }
 }
 
@@ -1554,5 +1708,311 @@ body.has-custom-cursor * {
         background-color: var(--text-color);
         border-radius: 2px;
         transform: translate(-50%, -50%);
+    }
+}
+
+/* 
+ * ==============================================================================
+ * HAMBURGER MENU STYLES
+ * ==============================================================================
+ * Responsive hamburger menu for mobile and tablet devices
+ * Hidden on desktop (> 1024px), visible on tablets and phones
+ */
+
+/* Hamburger button - only visible on mobile/tablet */
+.hamburger-toggle {
+    display: none;
+    /* Hidden by default on desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+    border: 1px dotted transparent;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    z-index: 1001;
+
+    &:hover {
+        background-color: var(--border-color);
+        transform: scale(1.1);
+        border-color: var(--border-color);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--text-secondary);
+    }
+
+    &:focus:not(:focus-visible) {
+        box-shadow: none;
+    }
+}
+
+/* Hamburger lines */
+.hamburger-line {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background-color: var(--text-color);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+/* Animate hamburger to X when active */
+.hamburger-toggle.active {
+    .hamburger-line:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+
+    .hamburger-line:nth-child(2) {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    .hamburger-line:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+}
+
+/* Mobile menu overlay */
+.mobile-menu {
+    display: none;
+    /* Hidden by default on desktop */
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* Start off-screen */
+    width: 280px;
+    height: 100vh;
+    background-color: var(--bg-color);
+    border-left: 3px dotted var(--border-color);
+    padding: 6rem 2rem 2rem;
+    /* Extra top padding to avoid hamburger collision */
+    transition: right 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+
+    &.active {
+        right: 0;
+        /* Slide in */
+    }
+}
+
+/* Dark mode shadow adjustment */
+body.dark-mode .mobile-menu,
+html.dark-mode body .mobile-menu {
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile navigation links */
+.mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px dotted var(--border-color);
+
+    .nav-link {
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding: 0.5rem 0;
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: translateX(4px);
+        }
+
+        &.active {
+            font-weight: 700;
+        }
+    }
+}
+
+
+
+/* Desktop navigation and social - hide on mobile/tablet */
+.desktop-nav,
+.desktop-social {
+    display: flex;
+    /* Visible by default on desktop */
+}
+
+/* 
+ * RESPONSIVE BREAKPOINTS
+ * Show hamburger menu on tablets and phones (1024px and below)
+ */
+@media (max-width: 1024px) {
+
+    /* Hide desktop navigation and social links */
+    .desktop-nav,
+    .desktop-social {
+        display: none !important;
+    }
+
+    /* Show hamburger button */
+    .hamburger-toggle {
+        display: flex;
+    }
+
+    /* Show mobile menu (but off-screen until activated) */
+    .mobile-menu {
+        display: block;
+    }
+
+    /* Adjust header layout for mobile - simplified since menu is outside header */
+    .site-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 2px dotted var(--border-color);
+        min-height: 48px;
+        /* Ensure consistent height */
+    }
+
+    /* Home link stays on left - ensure vertical centering */
+    .home-link {
+        order: 1;
+        display: inline-flex;
+        align-items: center;
+        line-height: 1;
+        /* Remove extra line height */
+    }
+
+    /* Header actions (hamburger only) on right */
+    .header-actions {
+        order: 2;
+        display: flex;
+        align-items: center;
+        /* Vertically center hamburger */
+        gap: 0.5rem;
+        margin-left: auto;
+        /* Push to the right */
+    }
+
+    /* Hide theme toggle from header on mobile - will be repositioned */
+    .header-actions .theme-toggle {
+        display: none !important;
+    }
+
+    /* Hamburger button - position fixed in lower right of menu when active */
+    .hamburger-toggle {
+        position: relative;
+
+        &.active {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1002;
+            /* Above menu content */
+        }
+    }
+}
+
+/* Floating theme toggle button for mobile/tablet - appears at bottom-right */
+@media (max-width: 1024px) {
+
+    /* Create floating theme toggle */
+    body .theme-toggle,
+    html body .theme-toggle {
+        display: flex !important;
+        /* Override the hide from header */
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 999;
+        width: 48px;
+        /* Larger for better touch target */
+        height: 48px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+        &:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    /* Dark mode shadow adjustment for floating button */
+    body.dark-mode .theme-toggle,
+    html.dark-mode body .theme-toggle {
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+
+        &:hover {
+            box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+        }
+    }
+}
+
+/* Fine-tune for smaller tablets and large phones */
+@media (max-width: 768px) {
+    .mobile-menu {
+        width: 250px;
+    }
+
+    .mobile-nav .nav-link {
+        font-size: 1rem;
+    }
+
+    /* Footer adjustments for mobile */
+    .site-footer {
+        margin-top: 3rem;
+        padding: 1.5rem 0;
+        margin-bottom: 5rem;
+        /* Extra space for floating theme toggle */
+    }
+
+    .social-icons {
+        gap: 2rem;
+        /* Larger gap for better touch targets */
+    }
+
+    .social-icon {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Fine-tune for small phones */
+@media (max-width: 480px) {
+    .mobile-menu {
+        width: 220px;
+        padding: 5rem 1.5rem 1.5rem;
+        /* Maintain top padding for hamburger */
+    }
+
+    .mobile-nav {
+        gap: 1.2rem;
+
+        .nav-link {
+            font-size: 0.95rem;
+        }
+    }
+
+    /* Adjust hamburger position for smaller screens */
+    .hamburger-toggle {
+        top: 2rem;
+        right: 1.5rem;
+    }
+
+    /* Adjust floating theme toggle for smaller screens */
+    body .theme-toggle,
+    html body .theme-toggle {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 44px;
+        height: 44px;
     }
 }
