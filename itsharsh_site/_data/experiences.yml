@@ -10,6 +10,13 @@
 #   {% if exp.roles %} (multiple roles)
 #   {% else %} (single role)
 # {% endfor %}
+- organization: "Nombre"
+  organization_url: "https://www.trynombre.in/"
+  start_date: "2025-01"
+  end_date: "present"
+  role: "Founding Engineer"
+  description: "A marketplace to for creators to tokenize their influence"
+
 - organization: "NextTechLab"
   start_date: "2025-04"
   end_date: "present"

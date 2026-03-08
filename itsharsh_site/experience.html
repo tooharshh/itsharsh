@@ -11,7 +11,13 @@ og_type: "profile"
 <div class="experience-section">
     {% for exp in site.data.experiences %}
     <div class="experience-item">
-        <h2>{{ exp.organization }}</h2>
+        <h2>
+            {% if exp.organization_url %}
+                <a href="{{ exp.organization_url }}" target="_blank" rel="noopener noreferrer">{{ exp.organization }}</a>
+            {% else %}
+                {{ exp.organization }}
+            {% endif %}
+        </h2>
         
         <p class="duration" data-start="{{ exp.start_date }}" data-end="{{ exp.end_date }}">
             {% assign start_parts = exp.start_date | split: "-" %}
@@ -61,6 +67,13 @@ og_type: "profile"
             <div class="role-info">
                 <p class="role"><strong>Role:</strong> {{ exp.role }}</p>
                 <p class="description">{{ exp.description }}</p>
+                {% if exp.highlights %}
+                <ul class="description-highlights">
+                    {% for highlight in exp.highlights %}
+                    <li>{{ highlight }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </div>
         {% endif %}
     </div>

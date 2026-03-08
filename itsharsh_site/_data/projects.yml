@@ -1,3 +1,7 @@
+- title: "Nombre"
+  url: "https://www.trynombre.in/"
+  description: "Built a Python/FastAPI CPMM trading engine integrating YouTube Data API v3 for dynamic creator valuations (<100ms execution), and developed a React/TypeScript SocialFi terminal with a PostgreSQL ledger for a token swap MVP used by 50+ beta users and 200K+ test token volume."
+
 - title: "PARAS"
   url: "https://github.com/tooharshh/PARAS"
   description: "An early warning system that predicts at-risk students and suggests personalized interventions using Machine Learning."
