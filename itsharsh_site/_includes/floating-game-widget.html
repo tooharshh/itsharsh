@@ -1,6 +1,7 @@
 <div id="floating-game-widget" class="floating-game-widget" data-game-script="{{ '/assets/js/mini-game.js' | relative_url }}">
     <button id="floating-game-launcher" class="floating-game-launcher" type="button" aria-label="Open mini game" aria-expanded="false" aria-controls="floating-game-panel">
-        <span class="launcher-text">bored??</span>
+        <span class="launcher-glyph" aria-hidden="true">[]</span>
+        <span class="launcher-label">bored??</span>
     </button>
 
     <section id="floating-game-panel" class="floating-game-panel" role="dialog" aria-modal="false" aria-label="Mini game" hidden>
@@ -9,7 +10,7 @@
             <button id="floating-game-close" class="floating-game-close" type="button" aria-label="Close mini game">close</button>
         </header>
 
-        <p class="floating-game-instructions">move with arrow keys or touch. collect dots. avoid dashes.</p>
+        <p class="floating-game-instructions">move with arrow keys or touch.<br>collect dots. avoid dashes.</p>
 
         <div class="floating-game-difficulty-row">
             <label for="floating-game-difficulty">difficulty</label>

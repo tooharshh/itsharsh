@@ -1573,59 +1573,51 @@ body.has-custom-cursor * {
 }
 
 .floating-game-launcher {
-    border: none;
-    background: none;
-    color: var(--text-secondary);
-    padding: 0;
+    min-width: 56px;
+    min-height: 56px;
+    border: 2px dotted var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 0.45rem 0.65rem;
     font: inherit;
     display: inline-flex;
     align-items: center;
+    gap: 0.45rem;
     cursor: pointer;
-    transition: color 0.2s ease, transform 0.3s ease;
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
     position: relative;
-    animation: launcher-float 3.2s ease-in-out infinite;
 
 
     &:hover {
-        color: var(--text-color);
+        border-style: dashed;
+        border-color: var(--text-secondary);
         transform: translateY(-1px);
     }
 
     &:focus {
+        outline: 2px solid var(--text-color);
+        outline-offset: 2px;
+    }
+
+    &:focus:not(:focus-visible) {
         outline: none;
     }
 
-    &:focus-visible .launcher-text {
-        text-decoration: underline;
-        text-decoration-thickness: 2px;
-        text-underline-offset: 3px;
+    .launcher-glyph {
+        font-weight: 700;
+        letter-spacing: -0.04em;
     }
 
-    .launcher-text {
-        font-size: 1.2rem;
-        font-weight: 700;
+    .launcher-label {
+        font-size: 1rem;
         line-height: 1;
-        letter-spacing: 0.01em;
-        color: var(--text-secondary);
+        color: var(--text-color);
         transition: color 0.2s ease;
     }
 
-    &:hover .launcher-text {
+    &:hover .launcher-label {
         color: var(--text-color);
-    }
-}
-
-@keyframes launcher-float {
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-4px);
-    }
-
-    100% {
-        transform: translateY(0);
     }
 }
 
@@ -1763,9 +1755,9 @@ html.dark-mode body .floating-game-panel {
     }
 
     .floating-game-launcher {
-        .launcher-text {
-            font-size: 1.08rem;
-        }
+        min-width: 56px;
+        min-height: 56px;
+        padding: 0.4rem 0.55rem;
     }
 
     .floating-game-controls {
@@ -1780,7 +1772,4 @@ html.dark-mode body .floating-game-panel {
         transition: none;
     }
 
-    .floating-game-launcher {
-        animation: none;
-    }
 }
