@@ -1,0 +1,41 @@
+<div id="floating-game-widget" class="floating-game-widget" data-game-script="{{ '/assets/js/mini-game.js' | relative_url }}">
+    <button id="floating-game-launcher" class="floating-game-launcher" type="button" aria-label="Open mini game" aria-expanded="false" aria-controls="floating-game-panel">
+        <span class="launcher-glyph" aria-hidden="true">[]</span>
+        <span class="launcher-label">play</span>
+    </button>
+
+    <section id="floating-game-panel" class="floating-game-panel" role="dialog" aria-modal="false" aria-label="Mini game" hidden>
+        <header class="floating-game-panel-header">
+            <h2>mini game</h2>
+            <button id="floating-game-close" class="floating-game-close" type="button" aria-label="Close mini game">close</button>
+        </header>
+
+        <p class="floating-game-instructions">move with arrow keys or touch. collect dots. avoid dashes.</p>
+
+        <div class="floating-game-difficulty-row">
+            <label for="floating-game-difficulty">difficulty</label>
+            <select id="floating-game-difficulty" class="floating-game-difficulty" aria-label="Select game difficulty">
+                <option value="normal">normal</option>
+                <option value="medium">medium</option>
+                <option value="high">high</option>
+                <option value="godmode">godmode</option>
+            </select>
+        </div>
+
+        <canvas id="floating-game-canvas" class="floating-game-canvas" width="320" height="200" aria-label="Mini game canvas" tabindex="0"></canvas>
+
+        <div class="floating-game-stats" aria-live="polite">
+            <span id="floating-game-score">score: 0</span>
+            <span id="floating-game-high-score">high: 0</span>
+            <span id="floating-game-quality">perf: auto</span>
+        </div>
+
+        <div class="floating-game-controls">
+            <button id="floating-game-start" type="button">start</button>
+            <button id="floating-game-pause" type="button">pause</button>
+            <button id="floating-game-restart" type="button">restart</button>
+        </div>
+
+        <p id="floating-game-status" class="floating-game-status"></p>
+    </section>
+</div>
