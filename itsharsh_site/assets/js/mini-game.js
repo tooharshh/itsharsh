@@ -417,14 +417,13 @@
                 ctx.stroke();
 
                 ctx.fillStyle = secondaryColor;
-                ctx.font = '700 24px "Space Mono", monospace';
+                ctx.font = '700 14px "Space Mono", monospace';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillStyle = textColor;
                 ctx.fillText('you lost :(', world.width / 2, bannerY + bannerHeight / 2 + 1);
             }
         }
-
         function tick(now) {
             if (!isMounted) {
                 return;
