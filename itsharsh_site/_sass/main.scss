@@ -1559,8 +1559,8 @@ body.has-custom-cursor * {
 
 .floating-game-widget {
     position: fixed;
-    right: calc(16px + env(safe-area-inset-right, 0px));
-    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    right: calc(28px + env(safe-area-inset-right, 0px));
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
     z-index: 9000;
     display: flex;
     flex-direction: column;
@@ -1573,44 +1573,59 @@ body.has-custom-cursor * {
 }
 
 .floating-game-launcher {
-    min-width: 56px;
-    min-height: 56px;
-    border: 2px dotted var(--border-color);
-    border-radius: 8px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    padding: 0.45rem 0.65rem;
+    border: none;
+    background: none;
+    color: var(--text-secondary);
+    padding: 0;
     font: inherit;
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
     cursor: pointer;
-    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    transition: color 0.2s ease, transform 0.3s ease;
+    position: relative;
+    animation: launcher-float 3.2s ease-in-out infinite;
 
 
     &:hover {
-        border-style: dashed;
-        border-color: var(--text-secondary);
+        color: var(--text-color);
         transform: translateY(-1px);
     }
 
     &:focus {
-        outline: 2px solid var(--text-color);
-        outline-offset: 2px;
-    }
-
-    &:focus:not(:focus-visible) {
         outline: none;
     }
 
-    .launcher-glyph {
-        font-weight: 700;
-        letter-spacing: -0.04em;
+    &:focus-visible .launcher-text {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
     }
 
-    .launcher-label {
-        font-size: 0.8rem;
+    .launcher-text {
+        font-size: 1.2rem;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: 0.01em;
         color: var(--text-secondary);
+        transition: color 0.2s ease;
+    }
+
+    &:hover .launcher-text {
+        color: var(--text-color);
+    }
+}
+
+@keyframes launcher-float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+
+    100% {
+        transform: translateY(0);
     }
 }
 
@@ -1739,8 +1754,8 @@ html.dark-mode body .floating-game-panel {
 
 @media (max-width: 480px) {
     .floating-game-widget {
-        right: calc(8px + env(safe-area-inset-right, 0px));
-        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+        right: calc(14px + env(safe-area-inset-right, 0px));
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     }
 
     .floating-game-panel {
@@ -1748,9 +1763,9 @@ html.dark-mode body .floating-game-panel {
     }
 
     .floating-game-launcher {
-        min-width: 56px;
-        min-height: 56px;
-        padding: 0.4rem 0.55rem;
+        .launcher-text {
+            font-size: 1.08rem;
+        }
     }
 
     .floating-game-controls {
@@ -1763,5 +1778,9 @@ html.dark-mode body .floating-game-panel {
     .floating-game-close,
     .floating-game-controls button {
         transition: none;
+    }
+
+    .floating-game-launcher {
+        animation: none;
     }
 }

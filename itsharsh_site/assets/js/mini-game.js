@@ -238,6 +238,16 @@
             hazards: []
         };
 
+        function syncControlState() {
+            const isGameOver = gameState === 'gameover';
+            const isPausedOrIdle = !isRunning && !isGameOver;
+
+            startBtn.disabled = isGameOver;
+            pauseBtn.disabled = isGameOver || isPausedOrIdle;
+            restartBtn.hidden = !isGameOver;
+            restartBtn.disabled = !isGameOver;
+        }
+
         function applyCanvasScale() {
             const dpr = window.devicePixelRatio || 1;
             const internalScale = config.renderScale * Math.min(dpr, 2);
@@ -339,6 +349,7 @@
                 statusEl.textContent = 'new high score.';
             }
             updateStats();
+            syncControlState();
         }
 
         function update(dt) {
@@ -485,18 +496,28 @@
         }
 
         function start() {
+            if (gameState === 'gameover') {
+                return;
+            }
+
             isRunning = true;
             gameState = 'running';
             statusEl.textContent = 'running.';
+            syncControlState();
             canvas.focus();
         }
 
         function pause() {
+            if (!isRunning || gameState === 'gameover') {
+                return;
+            }
+
             isRunning = false;
             if (gameState !== 'gameover') {
                 gameState = 'paused';
             }
             statusEl.textContent = 'paused.';
+            syncControlState();
         }
 
         function resume() {
@@ -505,8 +526,11 @@
 
         function restart() {
             resetWorld();
+            isRunning = true;
             gameState = 'running';
-            start();
+            statusEl.textContent = 'running.';
+            syncControlState();
+            canvas.focus();
         }
 
         function recalcTier() {
@@ -521,6 +545,7 @@
                 resetWorld();
             }
             updateStats();
+            syncControlState();
         }
 
         function applyDifficulty(nextDifficulty) {
@@ -543,6 +568,7 @@
             }
 
             updateStats();
+            syncControlState();
         }
 
         startBtn.addEventListener('click', start);
@@ -567,6 +593,7 @@
         writeStoredDifficulty(difficulty);
         resetWorld();
         updateStats();
+        syncControlState();
         rafId = window.requestAnimationFrame(tick);
 
         return {

@@ -1,7 +1,6 @@
 <div id="floating-game-widget" class="floating-game-widget" data-game-script="{{ '/assets/js/mini-game.js' | relative_url }}">
     <button id="floating-game-launcher" class="floating-game-launcher" type="button" aria-label="Open mini game" aria-expanded="false" aria-controls="floating-game-panel">
-        <span class="launcher-glyph" aria-hidden="true">[]</span>
-        <span class="launcher-label">play</span>
+        <span class="launcher-text">bored??</span>
     </button>
 
     <section id="floating-game-panel" class="floating-game-panel" role="dialog" aria-modal="false" aria-label="Mini game" hidden>
@@ -33,7 +32,7 @@
         <div class="floating-game-controls">
             <button id="floating-game-start" type="button">start</button>
             <button id="floating-game-pause" type="button">pause</button>
-            <button id="floating-game-restart" type="button">restart</button>
+            <button id="floating-game-restart" type="button" hidden>restart</button>
         </div>
 
         <p id="floating-game-status" class="floating-game-status"></p>
