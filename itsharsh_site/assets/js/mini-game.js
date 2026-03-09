@@ -326,7 +326,7 @@
 
         function checkCollisions() {
             if (collidesRectRect(world.player, world.coin)) {
-                score += 14;
+                score += 10;
                 world.coin.x = randomInRange(10, world.width - 10);
                 world.coin.y = randomInRange(10, world.height - 10);
             }
@@ -360,7 +360,6 @@
             handleInput(dt);
             updateHazards(dt);
             checkCollisions();
-            score += config.scoreRate * dt;
             updateStats();
         }
 
