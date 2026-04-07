@@ -1,0 +1,17 @@
+<div class="papers-grid">
+    {% for paper in site.data.papers %}
+    <div class="paper-card">
+        <h3>{{ paper.title }}</h3>
+
+        <p class="paper-meta">
+            <strong>{{ paper.type }}</strong> ·
+            <a href="{{ paper.conference_url }}" target="_blank" rel="noopener noreferrer">{{ paper.conference }}</a>
+            {% if paper.year %} · {{ paper.year }}{% endif %}
+        </p>
+
+        <p class="paper-link">
+            <a href="{{ paper.paper_url }}" target="_blank" rel="noopener noreferrer" class="underline">Read Paper →</a>
+        </p>
+    </div>
+    {% endfor %}
+</div>

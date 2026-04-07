@@ -1,0 +1,9 @@
+<div class="project-name-list-wrap">
+    <ul class="project-name-list" aria-label="Projects">
+        {% for project in site.data.projects %}
+        <li class="project-name-item">
+            <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
