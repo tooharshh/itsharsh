@@ -33,9 +33,7 @@ body {
 .outer-border {
     min-height: 100vh;
     padding: 1.5rem;
-    margin: 1rem;
-    border: 3px dotted var(--border-color);
-    border-radius: 8px;
+    /* Removed margin, border, and border-radius to eliminate outer borders */
     transition: border-color 0.3s ease;
 }
 
